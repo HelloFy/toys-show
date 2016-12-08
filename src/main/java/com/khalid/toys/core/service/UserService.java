@@ -17,4 +17,8 @@ public class UserService {
     public void regIn(User user){
         iUserDao.save(user);
     }
+
+    public User findByEmail(String email){
+       return iUserDao.findByEmail(email);
+    }
 }
