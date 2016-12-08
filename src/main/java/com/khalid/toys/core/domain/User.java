@@ -14,7 +14,8 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GenericGenerator(name = "generator", strategy = "uuid")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
     private String id;
 
     @Column(name = "login_name" , length = 20 , nullable = false , unique = true)

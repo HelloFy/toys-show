@@ -66,15 +66,7 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
+
   </dependencies>
 
   <build>
@@ -87,7 +79,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
-          <useSystemClassLoader>false</useSystemClassLoader>
+            <useSystemClassLoader>false</useSystemClassLoader>
+            <includes>
+                <include>**/Test*.java</include>
+            </includes>
         </configuration>
       </plugin>
     </plugins>
