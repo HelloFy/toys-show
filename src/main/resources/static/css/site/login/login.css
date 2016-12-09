@@ -1,0 +1,48 @@
+/**
+ * Created by 费玥 on 2016/12/9.
+ */
+#canvas{
+    position: absolute;
+    z-index: -1;
+}
+
+.grid{
+    height: 100%;
+    min-height: 720px;
+}
+.column{
+    margin: auto;
+    max-width: 450px;
+    min-height: 590px;
+    vertical-align: middle;
+    padding: 0;
+}
+
+.ui.secondary.pointing.menu{
+    border-bottom: none;!important;
+}
+
+.ui.container .item.login-item{
+     position: absolute;
+     left: 35%;
+}
+.ui.container .item.reg-item{
+    position: absolute;
+    right: 35%;
+}
+.ui.stacked{
+    margin:0em 0em 1em;
+}
+.a-loss-pw{
+    padding: 0.78571429em 0.92857143em;
+}
+.footer{
+    font-size: 13px;
+    line-height: 21px;
+    text-align: center;
+    color: #aebdc9;
+}
+.ui.line{
+    margin-left: 3px;
+    margin-right: 3px;
+}
