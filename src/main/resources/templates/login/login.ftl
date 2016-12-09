@@ -88,9 +88,9 @@
     <!-- 添加 RSS 订阅 -->
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
     <!-- 添加 favicon icon -->
-    <script type="text/javascript" src="/js/semantic.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css"/>
+    <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/semantic/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/semantic/semantic.min.css"/>
 
     <title>Toys Site Login</title>
 </head>

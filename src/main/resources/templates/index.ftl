@@ -16,13 +16,13 @@
     <!-- 为移动设备添加 viewport -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
     <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz -->
- 
+
     <!-- iOS 设备 begin -->
     <meta name="apple-mobile-web-app-title" content="标题">
     <!-- 添加到主屏后的标题（iOS 6 新增） -->
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
- 
+
     <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
     <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
@@ -59,7 +59,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144-precomposed.png"/>
     <!-- Retina iPad，144x144 像素，可以没有，但推荐有 -->
     <!-- iOS 图标 end -->
- 
+
     <!-- iOS 启动画面 begin -->
     <link rel="apple-touch-startup-image" sizes="768x1004" href="/splash-screen-768x1004.png"/>
     <!-- iPad 竖屏 768 x 1004（标准分辨率） -->
@@ -69,7 +69,7 @@
     <!-- iPad 横屏 1024x748（标准分辨率） -->
     <link rel="apple-touch-startup-image" sizes="2048x1496" href="/splash-screen-2048x1496.png"/>
     <!-- iPad 横屏 2048x1496（Retina） -->
- 
+
     <link rel="apple-touch-startup-image" href="/splash-screen-320x480.png"/>
     <!-- iPhone/iPod Touch 竖屏 320x480 (标准分辨率) -->
     <link rel="apple-touch-startup-image" sizes="640x960" href="/splash-screen-640x960.png"/>
@@ -77,24 +77,60 @@
     <link rel="apple-touch-startup-image" sizes="640x1136" href="/splash-screen-640x1136.png"/>
     <!-- iPhone 5/iPod Touch 5 竖屏 640x1136 (Retina) -->
     <!-- iOS 启动画面 end -->
- 
+
     <!-- iOS 设备 end -->
     <meta name="msapplication-TileColor" content="#000"/>
     <!-- Windows 8 磁贴颜色 -->
     <meta name="msapplication-TileImage" content="icon.png"/>
     <!-- Windows 8 磁贴图标 -->
- 
+
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"/>
     <!-- 添加 RSS 订阅 -->
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
     <!-- 添加 favicon icon -->
-    <script type="text/javascript" src="/js/semantic.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css"/>
- 
+    <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="/js/semantic/components/dropdown.js"></script>
+    <script type="text/javascript">
+        $('.ui.dropdown.item')
+                .dropdown()
+        ;
+    </script>
+    <link rel="stylesheet" type="text/css" href="/css/semantic/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/site/index.css">
+
     <title>Toys Site</title>
 </head>
 <body>
-<button class="ui primary button" type="button">Test</button>
+<div class="ui secondary attached top menu">
+    <div class="ui container">
+        <div class="left floated">
+            <a class="ui header" href="index">
+                <img class="ui image" src="/images/icon/favicon.ico">
+                <div class="content">T S</div>
+            </a>
+            <div class="ui action left icon input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="搜索...">
+                <div class="ui teal button">搜索</div>
+            </div>
+        </div>
+        <div class="right menu">
+            <div class="ui dropdown item">
+                <div class="text"><img class="ui avatar image" src="/images/icon/favicon.ico"> Jenny Hess </div>
+                <i class="dropdown icon"></i>
+                <div class="menu" id="profile-menu">
+                    <div class="item">Action</div>
+                    <div class="item">Another Action</div>
+                    <div class="item">Something else here</div>
+                    <div class="divider"></div>
+                    <div class="item">Separated Link</div>
+                    <div class="divider"></div>
+                    <div class="item">One more separated link</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
