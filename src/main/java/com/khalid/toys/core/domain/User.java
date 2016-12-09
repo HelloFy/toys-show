@@ -30,6 +30,9 @@ public class User {
     @Column(name = "email" , length = 30 , nullable = true , unique = true)
     private String email;
 
+    @Column(name = "sex", length = 5 , nullable = true)
+    private String sex;
+
     @Column(name = "reg_time" , nullable = false )
     @Temporal(TemporalType.DATE)
     private Date regTime;
@@ -78,6 +81,14 @@ public class User {
         this.email = email;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public Date getRegTime() {
         return regTime;
     }
@@ -98,4 +109,5 @@ public class User {
     public String toString(){
         return  "User is " + this.loginName;
     }
+
 }

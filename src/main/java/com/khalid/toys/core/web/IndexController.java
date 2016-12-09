@@ -12,8 +12,13 @@ import java.util.Map;
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = {"/","/index"})
     public String index(Map<String, Object> model){
         return "index";
+    }
+
+    @RequestMapping(value="/login.html")
+    public String login(Map<String, Object> model){
+        return "login/login";
     }
 }

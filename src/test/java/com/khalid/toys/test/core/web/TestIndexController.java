@@ -32,7 +32,7 @@ public class TestIndexController extends ControllerTestBase {
 
     @Test
     public void testIndex() throws Exception {
-        String uri = "/index";
+        String uri = "/index.ftl";
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.TEXT_HTML))
                 .andReturn();
 
