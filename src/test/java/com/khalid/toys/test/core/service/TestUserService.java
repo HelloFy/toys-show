@@ -1,31 +1,21 @@
 package com.khalid.toys.test.core.service;
 
 import com.khalid.toys.core.domain.User;
+import com.khalid.toys.core.service.UserService;
+import com.khalid.toys.test.core.TestBase;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-
-import java.util.Date;
 
 /**
  * Created by 费玥 on 2016/12/8.
  */
 
-public class TestUserService extends ServiceTestBase {
+public class TestUserService extends TestBase {
 
-    private User user;
-
-    @Before
-    public void setUp(){
-        user = new User();
-        user.setLoginName("feiyue");
-        user.setCredence(new char[]{'f','e','i','y','u','e'});
-        user.setBirthday(new Date());
-        user.setEmail("916073811@qq.com");
-        user.setMobile("+8617701085294");
-        user.setRegTime(new Date());
-    }
+    @Autowired
+    private UserService userService;
 
     @Test
     @Rollback

@@ -1,6 +1,7 @@
 package com.khalid.toys.test.core.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.khalid.toys.test.core.TestBase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 
 
-public class TestIndexController extends ControllerTestBase {
+public class TestIndexController extends TestBase {
 
     private MockMvc mockMvc;
 

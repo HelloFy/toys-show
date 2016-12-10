@@ -1,0 +1,33 @@
+.ui{
+    background: #ECECEC;
+}
+.ui.container{
+    height: 97%;
+    padding:5% 0;
+}
+.ui.two.column.grid{
+    padding: 10% 0;
+    margin: 0 auto;
+    max-width: 480px;
+    min-height: 590px;
+}
+.row{
+    margin: 0 auto;!important;
+}
+.ui.large.teal.header{
+    margin: inherit;!important;
+}
+.ui.content.teal.header{
+    margin: 0 auto;
+    font-size: 100px;
+    letter-spacing: 10px;
+}
+
+.ui.grid{
+    width: 420px;
+    margin: 0 auto;
+}
+
+.column{
+    text-align: center;
+}

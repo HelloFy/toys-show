@@ -130,6 +130,7 @@
         });
     </script>
     <link rel="stylesheet" type="text/css" href="/css/site/login/login.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/site/footer.css">
 
     <title>Toys Site Login</title>
 </head>
