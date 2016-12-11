@@ -88,6 +88,8 @@
     <!-- 添加 RSS 订阅 -->
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
     <!-- 添加 favicon icon -->
+
+    <script type="text/javascript" src="/js/vue/vue.js"></script>
     <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/js/semantic/semantic.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/semantic/semantic.min.css"/>
@@ -129,6 +131,8 @@
             ;
         });
     </script>
+    <script type="text/javascript" src="/js/site/login/login.validate.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/css/site/login/login.css"/>
     <link rel="stylesheet" type="text/css" href="/css/site/footer.css">
 
@@ -286,7 +290,8 @@
         </div>
 
         <div class="ui tab" data-tab="reg">
-            <form class="ui large form">
+            <form class="ui large form" id="reg-form" action="/register" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="ui stacked">
                     <div class="field">
                         <div class="ui left icon input">
@@ -296,8 +301,8 @@
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text" name="email" placeholder="手机">
+                            <i class="phone icon"></i>
+                            <input type="text" name="phone" placeholder="手机">
                         </div>
                     </div>
                     <div class="field">
@@ -306,11 +311,10 @@
                             <input type="password" name="password" placeholder="密码">
                         </div>
                     </div>
-                    <div class="ui fluid large teal submit button">注册</div>
+                    <div id="reg-button">
+                    <button class="ui fluid large teal button" v-on:click="doRegister">{{name}}</button>
+                    </div>
                 </div>
-
-                <div class="ui error message"></div>
-
             </form>
         </div>
     </div>
@@ -322,4 +326,17 @@
 </footer>
 
 </body>
+<script type="text/javascript">
+    new Vue({
+        el: '#reg-button',
+        data: {
+            name:'注册'
+        },
+        methods: {
+            doRegister: function (){
+                alert("do register")
+            }
+        }
+    });
+</script>
 </html>
