@@ -36,10 +36,7 @@
 .a-loss-pw{
     padding: 0.78571429em 0.92857143em;
 }
-
-.ui.basic.red.pointing.prompt.label.transition.visible{
-    float: left;
-    clear: both;
-    display: block;!important;
-    margin-bottom: 1em;
+.ui.basic.red.pointing.prompt.label{
+    margin-right: 324px;
+    width: 120px;
 }

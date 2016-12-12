@@ -2,8 +2,8 @@ $().ready(function () {
         $('#reg-form')
             .form({
                 fields: {
-                    name : {
-                        identifier: 'name',
+                    login_name : {
+                        identifier: 'login_name',
                         rules: [
                             {
                                 type   : 'empty',
@@ -11,8 +11,8 @@ $().ready(function () {
                             }
                         ]
                     },
-                    phone : {
-                        identifier: 'phone',
+                    mobile : {
+                        identifier: 'mobile',
                         rules: [
                             {
                                 type   : 'empty',
@@ -20,8 +20,8 @@ $().ready(function () {
                             }
                         ]
                     },
-                    password : {
-                        identifier: 'password',
+                    credence : {
+                        identifier: 'credence',
                         rules: [
                             {
                                 type   : 'empty',

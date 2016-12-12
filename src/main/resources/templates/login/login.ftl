@@ -176,21 +176,21 @@
     }
     // 绘制原点
     function drawCricle (cxt, x, y, r, moveX, moveY) {
-        var circle = new Circle(x, y, r, moveX, moveY)
-        cxt.beginPath()
-        cxt.arc(circle.x, circle.y, circle.r, 0, 2*Math.PI)
-        cxt.closePath()
+        var circle = new Circle(x, y, r, moveX, moveY);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        cxt.beginPath();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        cxt.arc(circle.x, circle.y, circle.r, 0, 2*Math.PI);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        cxt.closePath();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         cxt.fill();
         return circle;
     }
     //绘制线条
     function drawLine (cxt, x, y, _x, _y, o) {
-        var line = new Line(x, y, _x, _y, o)
-        cxt.beginPath()
-        cxt.strokeStyle = 'rgba(0,0,0,'+ o +')'
-        cxt.moveTo(line.beginX, line.beginY)
-        cxt.lineTo(line.closeX, line.closeY)
-        cxt.closePath()
+        var line = new Line(x, y, _x, _y, o);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        cxt.beginPath();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        cxt.strokeStyle = 'rgba(0,0,0,'+ o +')';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        cxt.moveTo(line.beginX, line.beginY);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        cxt.lineTo(line.closeX, line.closeY);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        cxt.closePath();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         cxt.stroke();
 
     }
@@ -293,22 +293,22 @@
             <form class="ui large form" id="reg-form" action="/register" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="ui stacked">
-                    <div class="field">
+                    <div class="field left">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="name" placeholder="昵称">
+                            <input type="text" name="login_name" placeholder="昵称">
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="phone icon"></i>
-                            <input type="text" name="phone" placeholder="手机">
+                            <input type="text" name="mobile" placeholder="手机">
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" name="password" placeholder="密码">
+                            <input type="password" name="credence" placeholder="密码">
                         </div>
                     </div>
                     <div id="reg-button">
@@ -334,7 +334,7 @@
         },
         methods: {
             doRegister: function (){
-                alert("do register")
+                alert(this.name)
             }
         }
     });

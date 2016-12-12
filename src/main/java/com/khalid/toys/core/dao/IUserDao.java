@@ -1,7 +1,7 @@
 package com.khalid.toys.core.dao;
 
 import com.khalid.toys.core.domain.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface IUserDao extends CrudRepository<User,String> {
+public interface IUserDao extends PagingAndSortingRepository<User,String> {
 
-    public User findByEmail(String email);
+    User findByEmail(String email);
 }

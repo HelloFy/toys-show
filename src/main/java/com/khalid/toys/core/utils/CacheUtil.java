@@ -29,6 +29,10 @@ public class CacheUtil {
         put(key,FastJsonUtil.obj2string(obj));
     }
 
+    public static boolean hasKey(String key){
+        return stringRedisTemplate.hasKey(key);
+    }
+
     @Autowired
     public void setStringRedisTemplate(StringRedisTemplate stringRedisTemplate){
         if (CacheUtil.stringRedisTemplate == null){

@@ -1,6 +1,7 @@
 package com.khalid.toys.core.domain;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -21,7 +22,8 @@ public class User {
     @Column(name = "login_name" , length = 20 , nullable = false , unique = true)
     private String loginName;
 
-    @Column(name = "credence" ,length = 25 , nullable = false)
+    @JSONField(serialize = false)
+    @Column(name = "credence" ,length = 256 , nullable = false)
     private char[] credence;
 
     @Column(name = "mobile" , length = 20 , nullable = false , unique = true)
@@ -33,10 +35,12 @@ public class User {
     @Column(name = "sex", length = 5 , nullable = true)
     private String sex;
 
+    @JSONField (format="yyyy-MM-dd")
     @Column(name = "reg_time" , nullable = false )
     @Temporal(TemporalType.DATE)
     private Date regTime;
 
+    @JSONField (format="yyyy-MM-dd")
     @Column(name = "birthday")
     @Temporal(TemporalType.DATE)
     private Date birthday;
