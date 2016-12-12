@@ -35,7 +35,7 @@ public class UserService {
         User userSaved = iUserDao.save(user);
         Role commonRole = null;
         try {
-            commonRole =  CacheUtil.getObject("1",Role.class);
+            commonRole =  CacheUtil.getObject("common_user",Role.class);
         }
         catch (Exception ex){
             commonRole =iRoleDao.findOne("1");

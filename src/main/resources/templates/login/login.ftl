@@ -272,7 +272,7 @@
                             <input type="password" name="password" placeholder="密码">
                         </div>
                     </div>
-                    <div class="ui fluid large teal submit button">登录</div>
+                    <div class="ui fluid large teal button">登录</div>
                 </div>
                 <div class="ui error message"></div>
                 <div class="ui container">
@@ -289,32 +289,50 @@
         </div>
 
         <div class="ui tab" data-tab="reg">
-            <form class="ui large form" id="reg-form" action="/register" method="post">
+            <form class="ui large form" id="reg-form">
                 <input type="hidden" id="csrf-reg-hid" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="ui stacked">
                     <div class="field left">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="loginName" placeholder="昵称">
+                            <input type="text" name="loginName" v-model="loginName" placeholder="昵称">
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="phone icon"></i>
-                            <input type="text" name="mobile" placeholder="手机">
+                            <input type="text" name="mobile" v-model="mobile" placeholder="手机">
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" name="credence" placeholder="密码">
+                            <input type="password" name="credence" v-model="credence" placeholder="密码">
                         </div>
                     </div>
                     <div id="reg-button">
-                    <button class="ui fluid large teal button" v-on:click="doRegister">注册</button>
+                        <button class="ui fluid large teal button" v-bind:class="{loading:click}">注册</button>
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<div class="ui small test modal">
+    <i class="close icon"></i>
+    <div class="header">
+        注册成功
+    </div>
+    <div class="content">
+        <p>您现在要登录吗？</p>
+    </div>
+    <div class="actions">
+        <div class="ui negative button">
+            不
+        </div>
+        <div class="ui positive right labeled icon button">
+            是的
+            <i class="checkmark icon"></i>
         </div>
     </div>
 </div>
@@ -323,7 +341,6 @@
     <span class="ui line">|</span>
     <span>联系我 email:916073811@qq.com</span>
 </footer>
-
 </body>
 <script type="text/javascript" src="/js/site/login/login.validate.js"></script>
 </html>

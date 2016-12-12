@@ -1,12 +1,10 @@
 var vm = new Vue({
-    el: '#reg-button',
+    el: '#reg-form',
     data: {
-        name:'注册'
-    },
-    methods: {
-        doRegister: function (){
-
-        }
+        loginName:'',
+        credence:'',
+        mobile:'',
+        click:false
     }
 });
 
@@ -29,8 +27,7 @@ $.fn.form.settings.rules.userIsExist = function(value){
         }
     });
     return !flag;
-};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+};
 $.fn.form.settings.rules.mobileIsExist = function(value){
     var flag;
     if(value == ''){
@@ -50,7 +47,7 @@ $.fn.form.settings.rules.mobileIsExist = function(value){
         }
     });
     return !flag;
-};;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+};
 $().ready(function () {
         $('#reg-form')
             .form({
@@ -84,6 +81,11 @@ $().ready(function () {
                                 prompt : '手机号不能为空'
                             },
                             {
+                                type   : 'regExp',
+                                value  : '/^1[3|4|5|7|8][0-9]{9}$/',
+                                prompt : '手机号不符合规则'
+                            },
+                            {
                                 type   : 'mobileIsExist',
                                 prompt : '手机号已经注册过'
                             }
@@ -108,6 +110,41 @@ $().ready(function () {
                     }
                 },
                 inline: true,
-                on: 'blur'
+                on: 'blur',
+                onSuccess: function (e) {
+                    e.preventDefault();
+                    vm.click = true;
+                    $.ajax({
+                        url:'/register',
+                        type:'POST',
+                        data:{
+                            _csrf:$('#csrf-reg-hid').val(),
+                            loginName:vm.loginName,
+                            credence:vm.credence,
+                            mobile:vm.mobile
+                        },
+                        dataType:'json',
+                        success:function (data) {
+                            vm.click=false;
+                            vm.loginName='';
+                            vm.credence='';
+                            vm.mobile='';
+                            $('.small.test.modal')
+                                .modal({
+                                    onApprove:function () {
+                                        $('.ui.secondary.pointing.menu .item').tab(
+                                            'change tab', 'login'
+                                        );
+                                    }
+                                }).modal('show')
+                            ;
+                        },
+                        error:function (data) {
+                            vm.click=false;
+                        }
+
+
+                    })
+                }
             });
 });

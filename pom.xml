@@ -66,6 +66,12 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <!-- spring OAuth2.0-->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+        </dependency>
+
         <!-- spring redis support -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
