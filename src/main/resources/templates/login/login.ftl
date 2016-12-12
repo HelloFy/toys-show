@@ -131,7 +131,6 @@
             ;
         });
     </script>
-    <script type="text/javascript" src="/js/site/login/login.validate.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/site/login/login.css"/>
     <link rel="stylesheet" type="text/css" href="/css/site/footer.css">
@@ -176,21 +175,21 @@
     }
     // 绘制原点
     function drawCricle (cxt, x, y, r, moveX, moveY) {
-        var circle = new Circle(x, y, r, moveX, moveY);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        cxt.beginPath();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        cxt.arc(circle.x, circle.y, circle.r, 0, 2*Math.PI);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        cxt.closePath();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        var circle = new Circle(x, y, r, moveX, moveY);
+        cxt.beginPath();
+        cxt.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
+        cxt.closePath();
         cxt.fill();
         return circle;
     }
     //绘制线条
     function drawLine (cxt, x, y, _x, _y, o) {
-        var line = new Line(x, y, _x, _y, o);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        cxt.beginPath();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        cxt.strokeStyle = 'rgba(0,0,0,'+ o +')';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        cxt.moveTo(line.beginX, line.beginY);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        cxt.lineTo(line.closeX, line.closeY);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-        cxt.closePath();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        var line = new Line(x, y, _x, _y, o);
+        cxt.beginPath();
+        cxt.strokeStyle = 'rgba(0,0,0,' + o + ')';
+        cxt.moveTo(line.beginX, line.beginY);
+        cxt.lineTo(line.closeX, line.closeY);
+        cxt.closePath();
         cxt.stroke();
 
     }
@@ -291,12 +290,12 @@
 
         <div class="ui tab" data-tab="reg">
             <form class="ui large form" id="reg-form" action="/register" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <input type="hidden" id="csrf-reg-hid" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="ui stacked">
                     <div class="field left">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="login_name" placeholder="昵称">
+                            <input type="text" name="loginName" placeholder="昵称">
                         </div>
                     </div>
                     <div class="field">
@@ -312,7 +311,7 @@
                         </div>
                     </div>
                     <div id="reg-button">
-                    <button class="ui fluid large teal button" v-on:click="doRegister">{{name}}</button>
+                    <button class="ui fluid large teal button" v-on:click="doRegister">注册</button>
                     </div>
                 </div>
             </form>
@@ -326,17 +325,5 @@
 </footer>
 
 </body>
-<script type="text/javascript">
-    new Vue({
-        el: '#reg-button',
-        data: {
-            name:'注册'
-        },
-        methods: {
-            doRegister: function (){
-                alert(this.name)
-            }
-        }
-    });
-</script>
+<script type="text/javascript" src="/js/site/login/login.validate.js"></script>
 </html>

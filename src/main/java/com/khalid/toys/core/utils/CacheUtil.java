@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by 费玥 on 2016/12/10.
  */
@@ -15,6 +17,11 @@ public class CacheUtil {
 
     public static void put(String key , String value){
         stringRedisTemplate.opsForValue().set(key,value);
+    }
+
+    public static void put(String key , String value , long expireTime){
+        put(key,value);
+        stringRedisTemplate.expire(key,expireTime, TimeUnit.SECONDS);
     }
 
     public static String get(String key){

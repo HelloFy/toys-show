@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface IUserDao extends PagingAndSortingRepository<User,String> {
 
     User findByEmail(String email);
+
+    User findByLoginName(String loginName);
 }
