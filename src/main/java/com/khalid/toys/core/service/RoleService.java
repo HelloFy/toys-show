@@ -5,6 +5,7 @@ import com.khalid.toys.core.domain.Role;
 import com.khalid.toys.core.utils.CacheNamespaceEnum;
 import com.khalid.toys.core.utils.CacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Set;
 /**
  * Created by 费玥 on 2016/12/13.
  */
+@Service
 public class RoleService {
 
     @Autowired

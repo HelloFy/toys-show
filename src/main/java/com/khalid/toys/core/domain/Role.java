@@ -1,5 +1,6 @@
 package com.khalid.toys.core.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -51,6 +52,7 @@ public class Role implements Serializable,GrantedAuthority {
     }
 
     @Override
+    @JSONField(serialize = false)
     public String getAuthority() {
         return roleName;
     }

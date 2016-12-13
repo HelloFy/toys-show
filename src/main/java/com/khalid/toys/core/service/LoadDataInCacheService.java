@@ -28,7 +28,7 @@ public class LoadDataInCacheService implements CommandLineRunner {
         logger.info("begin load data in cache...");
         Iterable<Role> allRoles = iRoleDao.findAll();
         for (Role role : allRoles){
-            if (!CacheUtil.hasKey(role.getId())){
+            if (!CacheUtil.hasHkey(CacheNamespaceEnum.ROLE_NAME_SPACE+"role",role.getRoleName())){
                 CacheUtil.hPutObject(CacheNamespaceEnum.ROLE_NAME_SPACE+"role",role.getRoleName(),role);
             }
         }
