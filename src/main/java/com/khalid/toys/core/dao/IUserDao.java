@@ -14,4 +14,6 @@ public interface IUserDao extends PagingAndSortingRepository<User,String> {
     User findByEmail(String email);
 
     User findByLoginName(String loginName);
+
+    User findByEmailOrMobile(String email , String mobile);
 }

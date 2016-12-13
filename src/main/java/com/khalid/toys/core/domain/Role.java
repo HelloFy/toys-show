@@ -1,15 +1,19 @@
 package com.khalid.toys.core.domain;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by 费玥 on 2016/12/9.
  */
 @Entity
 @Table(name = "ts_role")
-public class Role {
+public class Role implements Serializable,GrantedAuthority {
+
+    private static final long serialVersionUID = 6685076329274779790L;
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -44,5 +48,10 @@ public class Role {
 
     public void setRoleDesc(String roleDesc) {
         this.roleDesc = roleDesc;
+    }
+
+    @Override
+    public String getAuthority() {
+        return roleName;
     }
 }

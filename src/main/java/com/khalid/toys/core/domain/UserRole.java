@@ -3,13 +3,16 @@ package com.khalid.toys.core.domain;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by 费玥 on 2016/12/9.
  */
 @Entity
 @Table(name = "ts_user_role")
-public class UserRole {
+public class UserRole implements Serializable {
+
+    private static final long serialVersionUID = 3661515025213516612L;
 
     @Id
     @GeneratedValue(generator = "uuid")

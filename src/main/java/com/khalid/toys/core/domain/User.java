@@ -5,6 +5,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "ts_user")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -7497218176818087231L;
 
     @Id
     @GeneratedValue(generator = "uuid")

@@ -1,8 +1,11 @@
 .footer{
     font-size: 13px;
-    line-height: 21px;
     text-align: center;
     color: #aebdc9;
+    position: fixed;
+    left: 5em;
+    right: 3em;
+    bottom: 0;
 }
 .ui.line{
     margin-left: 3px;

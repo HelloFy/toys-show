@@ -3,6 +3,7 @@ package com.khalid.toys.core.service;
 import com.khalid.toys.core.dao.IRoleDao;
 import com.khalid.toys.core.dao.IUserDao;
 import com.khalid.toys.core.domain.Role;
+import com.khalid.toys.core.utils.CacheNamespaceEnum;
 import com.khalid.toys.core.utils.CacheUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class LoadDataInCacheService implements CommandLineRunner {
         Iterable<Role> allRoles = iRoleDao.findAll();
         for (Role role : allRoles){
             if (!CacheUtil.hasKey(role.getId())){
-                CacheUtil.putObject(role.getRoleName(),role);
+                CacheUtil.hPutObject(CacheNamespaceEnum.ROLE_NAME_SPACE+"role",role.getRoleName(),role);
             }
         }
         logger.info("end load data in cache...");

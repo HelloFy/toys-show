@@ -28,7 +28,7 @@ public abstract class TestBase {
         user.setCredence(new char[]{'f','e','i','y','u','e'});
         user.setBirthday(new Date());
         user.setEmail("916073811@qq.com");
-        user.setMobile("+8617701085294");
+        user.setMobile("17701085294");
         user.setRegTime(new Date());
     }
 }

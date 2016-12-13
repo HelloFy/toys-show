@@ -78,6 +78,13 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!-- redis session cache-->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+            <version>1.0.0.RC1</version>
+        </dependency>
+
         <!-- spring hot swap-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

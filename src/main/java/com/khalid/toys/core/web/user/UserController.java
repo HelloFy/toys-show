@@ -33,4 +33,9 @@ public class UserController {
         message.setErrorMsg("");
         return message;
     }
+
+    @RequestMapping("isLogin")
+    public Message isLogin(){
+        return message;
+    }
 }

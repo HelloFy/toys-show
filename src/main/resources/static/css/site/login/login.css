@@ -1,21 +1,21 @@
 /**
  * Created by 费玥 on 2016/12/9.
  */
+
 #canvas{
     position: absolute;
     z-index: -1;
 }
 
 .grid{
-    height: 100%;
-    min-height: 720px;
-}
+     height: 100%;
+ }
 .column{
     margin: auto;
     max-width: 450px;
-    min-height: 590px;
+    max-height: 640px;
     vertical-align: middle;
-    padding: 0;
+    padding: 0 10%;
 }
 
 .ui.secondary.pointing.menu{

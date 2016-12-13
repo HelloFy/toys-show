@@ -129,6 +129,16 @@
                         ;
                     })
             ;
+            $('.message .close')
+                    .on('click', function() {
+                        $(this)
+                                .closest('.message')
+                                .transition('fade')
+                        ;
+                        vm.hidden = true;
+                        vm.visible = false;
+                    })
+            ;
         });
     </script>
 
@@ -312,6 +322,11 @@
                     </div>
                     <div id="reg-button">
                         <button class="ui fluid large teal button" v-bind:class="{loading:click}">注册</button>
+                    </div>
+                    <div class="ui error message" v-bind:class="{hidden:hidden,visible:visible}">
+                        <i class="close icon"></i>
+                        <div class="header aligned left">注册失败 </div>
+                        <p class="aligned left">登录名或手机号被人抢占啦.</p>
                     </div>
                 </div>
             </form>
