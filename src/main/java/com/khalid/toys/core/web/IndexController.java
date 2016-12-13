@@ -39,7 +39,7 @@ public class IndexController {
     }
 
     @RequestMapping(value="/login.html")
-    public ModelAndView login(Map<String, Object> model,HttpSession httpSession){
+    public ModelAndView loginPage(Map<String, Object> model,HttpSession httpSession){
         return new ModelAndView("login/login");
     }
 

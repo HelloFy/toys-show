@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IRoleDao extends CrudRepository<Role,String> {
+
+    Role findByRoleName(String roleName);
 }

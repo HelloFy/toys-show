@@ -6,6 +6,7 @@ package com.khalid.toys.core.utils;
 public enum CacheNamespaceEnum {
     ROLE_NAME_SPACE("ts:role:"),USER_LOGINNAME_SPACE("ts:user:loginName:"),
     USER_MOBILE_SPACE("ts:user:mobile:"),USER_NAME_SPACE("ts:user:");
+
     private String keyNamespace;
 
     CacheNamespaceEnum(String keyNamespace){

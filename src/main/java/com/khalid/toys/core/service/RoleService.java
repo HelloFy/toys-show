@@ -45,7 +45,14 @@ public class RoleService {
         return roles;
     }
 
-    public boolean authorized(String id, String s, String s1) {
-        return false;
+    public Role findByRoleName(String roleName){
+        try {
+            if (CacheUtil.hasHkey(CacheNamespaceEnum.ROLE_NAME_SPACE + "role",roleName)){
+                return CacheUtil.hGetObject(CacheNamespaceEnum.ROLE_NAME_SPACE + "role",roleName,Role.class);
+            }
+        }catch (Exception ex){
+            return iRoleDao.findByRoleName(roleName);
+        }
+        return iRoleDao.findByRoleName(roleName);
     }
 }

@@ -25,7 +25,7 @@ public class CustomUserDetailService implements UserDetailsService {
     private UserService userService;
 
     @Autowired
-    private RoleService roleService;
+    private UserRoleService userRoleService;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -38,7 +38,7 @@ public class CustomUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("找不到用户");
         }
         Set<GrantedAuthority> authorities = new HashSet<>();
-        List<Role> roles = roleService.findAllRole();
+        List<Role> roles = userRoleService.findRolesWithUID(user.getId());
         for (Role role : roles){
             authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         }
