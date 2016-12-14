@@ -15,6 +15,7 @@ import java.util.List;
 @CacheConfig(cacheNames = "ts-cache")
 public interface IUserRoleDao extends CrudRepository<UserRole,String> {
 
+    @Cacheable
     List<UserRole> findByUserId(String uid);
 
     @Cacheable
