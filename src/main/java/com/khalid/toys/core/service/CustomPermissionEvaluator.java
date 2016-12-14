@@ -25,8 +25,9 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
         if (!ObjectUtils.isEmpty(authentication.getPrincipal()))
-            return userRoleService.authorized(((User.CustomUserDetail)authentication.getPrincipal()).getUid(),
-                                                targetDomainObject.toString(),permission.toString());
+            if (authentication.getPrincipal() instanceof User.CustomUserDetail)
+                return userRoleService.authorized(((User.CustomUserDetail) authentication.getPrincipal()).getUid(),
+                                                    targetDomainObject.toString(), permission.toString());
         return false;
     }
 
