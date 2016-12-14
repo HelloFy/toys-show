@@ -85,6 +85,13 @@
             <version>1.0.0.RC1</version>
         </dependency>
 
+        <!-- application cache -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+
         <!-- spring hot swap-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -104,6 +111,13 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.22</version>
+        </dependency>
+
+        <!-- guava cache implenment -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
         </dependency>
 
     </dependencies>

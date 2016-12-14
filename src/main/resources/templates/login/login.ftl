@@ -268,12 +268,13 @@
             </div>
         </div>
         <div class="ui tab" data-tab="login">
-            <form class="ui large form">
+            <form class="ui large form" action="/login" method="post" id="log-form">
+                <input type="hidden" id="csrf-log-hid" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="ui stacked">
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="email" placeholder="邮箱/手机">
+                            <input type="text" name="username" placeholder="邮箱/手机">
                         </div>
                     </div>
                     <div class="field">
@@ -282,8 +283,8 @@
                             <input type="password" name="password" placeholder="密码">
                         </div>
                     </div>
-                    <div class="ui fluid large teal button">登录</div>
                 </div>
+                <div class="ui fluid large teal submit button">登录</div>
                 <div class="ui error message"></div>
                 <div class="ui container">
                     <div class="ui secondary menu">

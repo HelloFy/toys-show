@@ -1,5 +1,7 @@
 package com.khalid.toys.core.configure;
 
+import com.khalid.toys.core.service.CustomAuthenticationProvider;
+import com.khalid.toys.core.service.CustomPassWordEncoder;
 import com.khalid.toys.core.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +10,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
@@ -24,8 +25,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomUserDetailService customUserDetailService;
 
     @Autowired
+    private CustomAuthenticationProvider customAuthenticationProvider;
+
+    @Autowired
+    private CustomPassWordEncoder customPassWordEncoder;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailService).passwordEncoder(new BCryptPasswordEncoder(10));
+        auth.authenticationProvider(customAuthenticationProvider).userDetailsService(customUserDetailService).passwordEncoder(customPassWordEncoder);
     }
 
     @Override
@@ -34,8 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/index","/error/**","/js/**","/css/**","/images/**","/user/existName","/user/existMobile").permitAll()
                 .and()
-                .formLogin()
-                .loginPage("/login.html")
+                .formLogin().usernameParameter("username").passwordParameter("password")
+                .loginPage("/login.html").loginProcessingUrl("/login").successForwardUrl("/index").failureForwardUrl("/login.html")
                 .permitAll()
                 .and()
                 .logout()

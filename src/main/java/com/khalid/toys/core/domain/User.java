@@ -3,10 +3,14 @@ package com.khalid.toys.core.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by 费玥 on 2016/12/8.
@@ -47,6 +51,9 @@ public class User implements Serializable {
     @Column(name = "birthday")
     @Temporal(TemporalType.DATE)
     private Date birthday;
+
+    @Column(name = "is_lock")
+    private boolean isLock = false;
 
     public String getId() {
         return id;
@@ -115,6 +122,65 @@ public class User implements Serializable {
     @Override
     public String toString(){
         return  "User is " + this.loginName;
+    }
+
+    public boolean isLock() {
+        return isLock;
+    }
+
+    public void setLock(boolean lock) {
+        isLock = lock;
+    }
+
+    public class CustomUserDetail implements UserDetails,Serializable{
+
+        private static final long serialVersionUID = 5202551108400584706L;
+        private String username;
+        private Set<? extends GrantedAuthority> authorities;
+
+        public CustomUserDetail(String username,Set<? extends GrantedAuthority> authorities){
+            this.username =username;
+            this.authorities =authorities;
+        }
+
+        @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return this.authorities;
+        }
+
+        @Override
+        public String getPassword() {
+            return new String(User.this.getCredence());
+        }
+
+        @Override
+        public String getUsername() {
+            return username;
+        }
+
+        @Override
+        public boolean isAccountNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isAccountNonLocked() {
+            return !User.this.isLock;
+        }
+
+        @Override
+        public boolean isCredentialsNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return true;
+        }
+
+        public String getUid(){
+            return User.this.id;
+        }
     }
 
 }

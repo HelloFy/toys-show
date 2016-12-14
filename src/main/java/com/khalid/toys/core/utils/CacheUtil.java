@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by 费玥 on 2016/12/10.
  */
-@SuppressWarnings("SpringJavaAutowiringInspection")
 @Component
 public class CacheUtil {
 

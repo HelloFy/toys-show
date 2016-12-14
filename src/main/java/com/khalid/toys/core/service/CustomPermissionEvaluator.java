@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.NotSupportedException;
 import java.io.Serializable;
@@ -23,9 +24,10 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
-        String username = authentication.getName();
-        User user  = userService.findByEmailOrMobile(username,username);
-        return userRoleService.authorized(user.getId(), targetDomainObject.toString(), permission.toString());
+        if (!ObjectUtils.isEmpty(authentication.getPrincipal()))
+            return userRoleService.authorized(((User.CustomUserDetail)authentication.getPrincipal()).getUid(),
+                                                targetDomainObject.toString(),permission.toString());
+        return false;
     }
 
     @Override

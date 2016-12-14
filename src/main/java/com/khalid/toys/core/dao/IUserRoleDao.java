@@ -1,6 +1,7 @@
 package com.khalid.toys.core.dao;
 
 import com.khalid.toys.core.domain.UserRole;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,8 @@ import java.util.List;
 @Repository
 public interface IUserRoleDao extends CrudRepository<UserRole,String> {
 
-    public List<UserRole> findByUserId(String uid);
+    List<UserRole> findByUserId(String uid);
 
-    public UserRole findByUserIdAndRoleId(String uid,String rid);
+    @Cacheable(value="ts-cache")
+    UserRole findByUserIdAndRoleId(String uid, String rid);
 }

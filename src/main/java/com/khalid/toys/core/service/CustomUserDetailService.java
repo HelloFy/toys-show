@@ -42,12 +42,6 @@ public class CustomUserDetailService implements UserDetailsService {
         for (Role role : roles){
             authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         }
-        return new org.springframework.security.core.userdetails.User(
-                s, new String(user.getCredence()),
-                true,//是否可用
-                true,//是否过期
-                true,//证书不过期为true
-                true,//账户未锁定为true
-                authorities);
+        return user.new CustomUserDetail(s,authorities);
     }
 }

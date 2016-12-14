@@ -157,4 +157,84 @@ $().ready(function () {
                 })
             }
         });
+    $('#log-form')
+        .form({
+            fields: {
+                username: {
+                    identifier: 'username',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '登录名不能为空'
+                        },
+                        {
+                            type: 'maxLength[25]',
+                            prompt: '登录名过长'
+                        }
+                    ]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '密码不能为空'
+                        },
+                        {
+                            type: 'minLength[6]',
+                            prompt: '密码长度不够，6-16个字符'
+                        },
+                        {
+                            type: 'maxLength[16]',
+                            prompt: '密码长度太长，2-16个字符'
+                        }
+                    ]
+                }
+            },
+            inline: true,
+            on: 'blur',
+            /*onSuccess: function (e) {
+                e.preventDefault();
+                vm.click = true;
+                $.ajax({
+                    url: '/register',
+                    type: 'POST',
+                    data: {
+                        _csrf: $('#csrf-reg-hid').val(),
+                        loginName: vm.loginName,
+                        credence: vm.credence,
+                        mobile: vm.mobile
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.result == 'success') {
+                            vm.click = false;
+                            vm.loginName = '';
+                            vm.credence = '';
+                            vm.mobile = '';
+                            $('.small.test.modal')
+                                .modal({
+                                    onApprove: function () {
+                                        $('.ui.secondary.pointing.menu .item').tab(
+                                            'change tab', 'login'
+                                        );
+                                    }
+                                }).modal('show');
+                        }
+                        else {
+                            vm.click = false;
+                            vm.hidden = false;
+                            vm.visible = true;
+                        }
+                    },
+                    error: function (data) {
+                        vm.click = false;
+                        vm.hidden = false;
+                        vm.visible = true;
+                    }
+
+
+                })
+            }*/
+        });
 });

@@ -4,6 +4,7 @@ import com.khalid.toys.core.dao.IRoleDao;
 import com.khalid.toys.core.domain.Role;
 import com.khalid.toys.core.utils.CacheNamespaceEnum;
 import com.khalid.toys.core.utils.CacheUtil;
+import com.khalid.toys.core.utils.RoleNameConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class RoleService {
     public List<Role> findAllRole() {
         List<Role> roles = new ArrayList<>();
         try {
-            if (CacheUtil.hasHkey(CacheNamespaceEnum.ROLE_NAME_SPACE + "role", "v_user")) {
+            if (CacheUtil.hasHkey(CacheNamespaceEnum.ROLE_NAME_SPACE + "role", RoleNameConstant.COMMON_USER)) {
                 Set<Object> allRoleNames = CacheUtil.hAllField(CacheNamespaceEnum.ROLE_NAME_SPACE + "role");
                 for (Object roleName : allRoleNames) {
                     Role role = CacheUtil.hGetObject(CacheNamespaceEnum.ROLE_NAME_SPACE + "role", (String) roleName, Role.class);

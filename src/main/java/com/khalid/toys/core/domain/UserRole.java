@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "ts_user_role")
+@Cacheable
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 3661515025213516612L;

@@ -8,6 +8,7 @@ import com.khalid.toys.core.domain.User;
 import com.khalid.toys.core.domain.UserRole;
 import com.khalid.toys.core.utils.CacheNamespaceEnum;
 import com.khalid.toys.core.utils.CacheUtil;
+import com.khalid.toys.core.utils.RoleNameConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +30,16 @@ public class UserService {
     @Autowired
     private IUserRoleDao iUserRoleDao;
 
+    @Autowired
+    private CustomPassWordEncoder customPassWordEncoder;
+
     public void regIn(User user) throws SQLException {
         if (CacheUtil.hasHkey(CacheNamespaceEnum.USER_LOGINNAME_SPACE + "loginName", user.getLoginName()))
             throw new IllegalStateException("登录名重复");
         if (CacheUtil.hasHkey(CacheNamespaceEnum.USER_MOBILE_SPACE + "mobile", user.getMobile())) {
             throw new IllegalStateException("手机号重复");
         }
-        user.setCredence(SystemService.encodePassWord(user.getCredence()));
+        user.setCredence(customPassWordEncoder.encode(new String(user.getCredence())).toCharArray());
         CacheUtil.hPut(CacheNamespaceEnum.USER_LOGINNAME_SPACE + "loginName", user.getLoginName(), "has");
         CacheUtil.hPut(CacheNamespaceEnum.USER_MOBILE_SPACE + "mobile", user.getMobile(), "has");
         user.setRegTime(new Date());
@@ -43,7 +47,7 @@ public class UserService {
             User userSaved = iUserDao.save(user);
             Role commonRole = null;
             try {
-                commonRole = CacheUtil.hGetObject(CacheNamespaceEnum.ROLE_NAME_SPACE+"role","common_user", Role.class);
+                commonRole = CacheUtil.hGetObject(CacheNamespaceEnum.ROLE_NAME_SPACE+"role", RoleNameConstant.COMMON_USER, Role.class);
                 if (commonRole == null) {
                     commonRole = iRoleDao.findOne("1");
                 }

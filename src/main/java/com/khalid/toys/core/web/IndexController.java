@@ -4,6 +4,7 @@ import com.khalid.toys.core.domain.Message;
 import com.khalid.toys.core.domain.User;
 import com.khalid.toys.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Map;
+
+import static com.khalid.toys.core.utils.RoleNameConstant.COMMON_USER;
 
 /**
  * Created by 费玥 on 2016/12/7.
@@ -34,6 +37,7 @@ public class IndexController {
     }
 
     @RequestMapping(value = {"/","/index"})
+    @PreAuthorize("hasPermission('', '"+COMMON_USER+"')")
     public ModelAndView index(Map<String, Object> model){
         return new ModelAndView("index");
     }
