@@ -50,7 +50,7 @@ $.fn.form.settings.rules.mobileIsExist = function (value) {
     });
     return !flag;
 };
-$().ready(function () {
+$(document).ready(function () {
     $('#reg-form')
         .form({
             fields: {
@@ -191,8 +191,7 @@ $().ready(function () {
                     ]
                 }
             },
-            inline: true,
-            on: 'blur',
+            inline: true
             /*onSuccess: function (e) {
                 e.preventDefault();
                 vm.click = true;

@@ -36,7 +36,7 @@ public class IndexController {
         return message;
     }
 
-    @RequestMapping(value = {"/","/index"})
+    @RequestMapping(value = {"/"})
     @PreAuthorize("hasPermission('', '"+COMMON_USER+"')")
     public ModelAndView index(Map<String, Object> model){
         return new ModelAndView("index");

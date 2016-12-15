@@ -1,5 +1,6 @@
 package com.khalid.toys.core.configure;
 
+import com.khalid.toys.core.configure.handler.CustomRedirectSuccessHandler;
 import com.khalid.toys.core.service.CustomAuthenticationProvider;
 import com.khalid.toys.core.service.CustomPassWordEncoder;
 import com.khalid.toys.core.service.CustomUserDetailService;
@@ -39,14 +40,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index","/error/**","/js/**","/css/**","/images/**","/user/existName","/user/existMobile").permitAll()
+                .antMatchers("/","/error/**","/js/**","/css/**","/images/**","/user/existName","/user/existMobile").permitAll()
                 .and()
                 .formLogin().usernameParameter("username").passwordParameter("password")
-                .loginPage("/login.html").loginProcessingUrl("/login").successForwardUrl("/index").failureForwardUrl("/login.html")
+                .loginPage("/login.html").loginProcessingUrl("/login")
+                .successHandler(new CustomRedirectSuccessHandler("/")).failureForwardUrl("/login.html")
                 .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
+                .logoutSuccessUrl("/login.html")
                 .invalidateHttpSession(true)
                 .permitAll()
                 .and()

@@ -88,17 +88,10 @@
     <!-- 添加 RSS 订阅 -->
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
     <!-- 添加 favicon icon -->
-    <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/vue/vue.js"></script>
+    <#--<script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/js/semantic/semantic.min.js"></script>
-    <script type="text/javascript" src="/js/semantic/components/dropdown.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('.ui.dropdown.item').dropdown({
-                on: 'hover',
-                action:'noting'
-            });
-        });
-    </script>
+    <script type="text/javascript" src="/js/semantic/components/dropdown.js"></script>-->
     <link rel="stylesheet" type="text/css" href="/css/semantic/semantic.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/semantic/semantic/components/dropdown.css">
     <link rel="stylesheet" type="text/css" href="/css/semantic/semantic/components/menu.css"></link>
@@ -107,34 +100,40 @@
     <title>Toys Site</title>
 </head>
 <body>
-<div class="ui secondary stackable menu">
-    <div class="ui container">
-        <div class="item">
-            <a class="ui header" href="index">
-                <img class="image" src="/images/icon/favicon.ico">
-                <div class="content">T S</div>
-            </a>
-        </div>
-        <div class="item">
-            <div class="ui action left icon input">
-                <i class="search icon"></i>
-                <input type="text" placeholder="搜索...">
-                <div class="ui teal button">搜索</div>
+<div class="ui">
+    <div class="ui secondary stackable menu">
+        <div class="ui container">
+            <div class="item">
+                <a class="ui header" href="/">
+                    <img class="image" src="/images/icon/favicon.ico">
+                    <div class="content">T S</div>
+                </a>
             </div>
-        </div>
-        <div class="right secondary stackable menu">
-            <div class="ui dropdown item">
-                <div class="text"><img class="ui avatar image" src="/images/icon/favicon.ico">Josh Player</div>
-                <i class="dropdown icon"></i>
-                <div class="menu" id="profile-menu">
-                    <a class="item">我的主页</a>
-                    <a class="item">私信</a>
-                    <a class="item">设置</a>
-                    <a class="item">退出</a>
+            <div class="item">
+                <div class="ui action left icon input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="搜索...">
+                    <div class="ui teal button">搜索</div>
                 </div>
             </div>
+            <div class="ui right secondary menu">
+                <div class="ui simple dropdown item">
+                    <div class="text"><img class="ui avatar image" src="/images/icon/favicon.ico">Josh Player</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu" id="profile-menu">
+                        <a class="item">我的主页</a>
+                        <a class="item">私信</a>
+                        <a class="item">设置</a>
+                        <a class="item" id="logout-ts" v-on:click="logout()">退出</a>
+                    </div>
+                </div>
+            </div>
+            <form id="logout-form" class="ui hidden" action="/logout" method="post">
+                <input type="hidden" id="csrf-token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
         </div>
     </div>
 </div>
 </body>
+<script type="text/javascript" src="/js/site/index.js"></script>
 </html>
