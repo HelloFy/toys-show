@@ -54,11 +54,4 @@ public class IndexController {
         message.setErrorMsg("");
         return message;
     }
-
-    @RequestMapping(value = "/getCsrfToken")
-    public Message getToken(HttpSession session){
-        message.setResult(session.getAttribute("_csrf"));
-        message.setErrorMsg("");
-        return message;
-    }
 }
