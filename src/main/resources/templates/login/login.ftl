@@ -274,13 +274,13 @@
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="username" placeholder="邮箱/手机">
+                            <input type="text" name="username" v-model="username" placeholder="邮箱/手机">
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" name="password" placeholder="密码">
+                            <input type="password" name="password" v-model="password" placeholder="密码">
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,8 @@ var vm = new Vue({
         loginName: '',
         credence: '',
         mobile: '',
+        password:'',
+        username:'',
         click: false,
         hidden: true,
         visible:false
