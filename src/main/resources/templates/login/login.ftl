@@ -309,14 +309,16 @@
                     <div class="field left">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="loginName" v-model="loginName" placeholder="昵称">
+                            <input type="text" name="loginName" v-model="loginName" placeholder="昵称" v-on:focus="focusInLoginName" v-on:blur="blurInLoginName">
                         </div>
+                        <div class="ui basic red pointing prompt label transition" v-bind:class="{hidden:uNameValid,visible:!uNameValid}">{{lnmsg}}</div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="phone icon"></i>
-                            <input type="text" name="mobile" v-model="mobile" placeholder="手机">
+                            <input type="text" name="mobile" v-model="mobile" placeholder="手机" v-on:focus="focusInMobile" v-on:blur="blurInMobile">
                         </div>
+                        <div class="ui basic red pointing prompt label transition" v-bind:class="{hidden:mobileValid,visible:!mobileValid}">{{mbmsg}}</div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
