@@ -89,6 +89,7 @@
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/>
     <!-- 添加 favicon icon -->
     <script type="text/javascript" src="/js/vue/vue.js"></script>
+    <script type="text/javascript" src="/js/fetch/fetch.js"></script>
     <#--<script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/js/semantic/semantic.min.js"></script>
     <script type="text/javascript" src="/js/semantic/components/dropdown.js"></script>-->

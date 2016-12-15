@@ -1,5 +1,5 @@
 var vm = new Vue({
-    el: '#reg-form',
+    el: '.ui.middle.aligned.center.aligned.grid',
     data: {
         loginName: '',
         credence: '',
@@ -8,7 +8,11 @@ var vm = new Vue({
         username:'',
         click: false,
         hidden: true,
-        visible:false
+        visible:false,
+        _csrf:''
+    },
+    mounted:function () {
+        this._csrf = document.getElementById('csrf-hid').value;
     }
 });
 
@@ -17,18 +21,21 @@ $.fn.form.settings.rules.userIsExist = function (value) {
     if (value == '') {
         return;
     }
-    $.ajax({
-        async: false,
-        url: "/user/existName",
-        type: "POST",
-        dataType: "json",
-        data: {
-            _csrf: $('#csrf-reg-hid').val(),
-            loginName: value
+    fetch('/user/existName',{
+        method: "POST",
+        body: '_csrf='+vm._csrf+'&loginName='+vm.loginName,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        success: function (data) {
+        credentials: "same-origin"
+    }).then(function(response) {
+        response.json().then(function(data) {
             flag = data.result;
-        }
+        });
+        return;
+    }, function(error) {
+        error.message //=> String
     });
     return !flag;
 };
@@ -43,7 +50,7 @@ $.fn.form.settings.rules.mobileIsExist = function (value) {
         type: "POST",
         dataType: "json",
         data: {
-            _csrf: $('#csrf-reg-hid').val(),
+            _csrf: vm._csrf,
             mobile: value
         },
         success: function (data) {
@@ -154,8 +161,6 @@ $(document).ready(function () {
                         vm.hidden = false;
                         vm.visible = true;
                     }
-
-
                 })
             }
         });
@@ -193,49 +198,34 @@ $(document).ready(function () {
                     ]
                 }
             },
-            inline: true
-            /*onSuccess: function (e) {
+            inline: true,
+            onSuccess: function (e) {
                 e.preventDefault();
                 vm.click = true;
                 $.ajax({
-                    url: '/register',
+                    url: '/login',
                     type: 'POST',
                     data: {
                         _csrf: $('#csrf-reg-hid').val(),
-                        loginName: vm.loginName,
-                        credence: vm.credence,
-                        mobile: vm.mobile
+                        username: vm.username,
+                        password: vm.password,
                     },
                     dataType: 'json',
                     success: function (data) {
-                        if (data.result == 'success') {
-                            vm.click = false;
-                            vm.loginName = '';
-                            vm.credence = '';
-                            vm.mobile = '';
-                            $('.small.test.modal')
-                                .modal({
-                                    onApprove: function () {
-                                        $('.ui.secondary.pointing.menu .item').tab(
-                                            'change tab', 'login'
-                                        );
-                                    }
-                                }).modal('show');
-                        }
-                        else {
-                            vm.click = false;
+                        if (data.result == 'fail') {
                             vm.hidden = false;
                             vm.visible = true;
+                            vm.click=false;
+                        }
+                        else {
+                            window.location='/';
                         }
                     },
                     error: function (data) {
-                        vm.click = false;
                         vm.hidden = false;
                         vm.visible = true;
                     }
-
-
                 })
-            }*/
+            }
         });
 });

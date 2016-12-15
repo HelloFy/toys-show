@@ -255,6 +255,7 @@
 </script>
 <div class="ui middle aligned center aligned grid">
     <div class="column">
+        <input type="hidden" id="csrf-hid" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <h1 class="ui teal image header">
             <img src="/images/icon/favicon.ico" class="image">
         </h1>
@@ -268,8 +269,7 @@
             </div>
         </div>
         <div class="ui tab" data-tab="login">
-            <form class="ui large form" action="/login" method="post" id="log-form">
-                <input type="hidden" id="csrf-log-hid" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <form class="ui large form" id="log-form">
                 <div class="ui stacked">
                     <div class="field">
                         <div class="ui left icon input">
@@ -284,8 +284,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui fluid large teal submit button">登录</div>
-                <div class="ui error message"></div>
+                <div class="ui fluid large teal submit button" v-bind:class="{loading:click}">登录</div>
+                <div class="ui error message" v-bind:class="{hidden:hidden,visible:visible}">
+                    <i class="close icon"></i>
+                    <div class="header aligned left">登录失败 </div>
+                    <p class="aligned left">账号或密码错误.</p>
+                </div>
                 <div class="ui container">
                     <div class="ui secondary menu">
                         <a class="item"><i class="weibo icon"></i> </a>
@@ -301,7 +305,6 @@
 
         <div class="ui tab" data-tab="reg">
             <form class="ui large form" id="reg-form">
-                <input type="hidden" id="csrf-reg-hid" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="ui stacked">
                     <div class="field left">
                         <div class="ui left icon input">

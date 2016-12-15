@@ -1,6 +1,7 @@
 package com.khalid.toys.core.configure;
 
-import com.khalid.toys.core.configure.handler.CustomRedirectSuccessHandler;
+import com.khalid.toys.core.configure.handler.CustomAuthFailHandler;
+import com.khalid.toys.core.configure.handler.CustomAuthSuccessHandler;
 import com.khalid.toys.core.service.CustomAuthenticationProvider;
 import com.khalid.toys.core.service.CustomPassWordEncoder;
 import com.khalid.toys.core.service.CustomUserDetailService;
@@ -33,18 +34,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(customAuthenticationProvider).userDetailsService(customUserDetailService).passwordEncoder(customPassWordEncoder);
+        auth.userDetailsService(customUserDetailService).passwordEncoder(customPassWordEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/error/**","/js/**","/css/**","/images/**","/user/existName","/user/existMobile").permitAll()
+                .antMatchers("/","/error/**","/js/**","/css/**","/images/**","/user/existName","/user/existMobile","/getCsrfToken").permitAll()
                 .and()
                 .formLogin().usernameParameter("username").passwordParameter("password")
                 .loginPage("/login.html").loginProcessingUrl("/login")
-                .successHandler(new CustomRedirectSuccessHandler("/")).failureForwardUrl("/login.html")
+                .successHandler(new CustomAuthSuccessHandler())
+                .failureHandler(new CustomAuthFailHandler())
                 .permitAll()
                 .and()
                 .logout()
