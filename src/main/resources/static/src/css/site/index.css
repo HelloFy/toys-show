@@ -1,6 +1,6 @@
 .ui.secondary.menu{
     height: 50px;
-    background: #FFD700;!important;
+    background: #FFD700;
 }
 
 .ui.header{
@@ -9,6 +9,6 @@
 
 #profile-menu{
     /*width: 100px;!important;*/
-    background: #FFD700;!important;
+    background: #FFD700;
     margin-top: -2px;
 }

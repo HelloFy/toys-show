@@ -2934,7 +2934,7 @@ function renderMixin (Vue) {
   // loose indexOf
   Vue.prototype._i = looseIndexOf;
 
-  // render static tree by index.ftl
+  // render static tree by index.ftl.bak
   Vue.prototype._m = function renderStatic (
     index,
     isInFor
