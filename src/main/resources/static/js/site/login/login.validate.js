@@ -50,9 +50,9 @@ var vm = new Vue({
                         vm.lnmsg = '昵称已经被占用';
                         vm.uNameValid = !flag;
                     });
-                    return;
+
                 }, function (error) {
-                    error.message //=> String
+                    error.message;;;;;;;;; //=> String
                 });
             }
         },
@@ -84,9 +84,9 @@ var vm = new Vue({
                         vm.mbmsg = '手机号已经被注册';
 
                     });
-                    return;
+
                 }, function (error) {
-                    error.message //=> String
+                    error.message;;;;;;;;; //=> String
                 });
             }
         }
@@ -119,26 +119,26 @@ $(document).ready(function () {
             onSuccess: function (e) {
                 e.preventDefault();
                 vm.click = true;
-                if (vm.loginName === '' && vm.mobile == '') {
+                if (vm.loginName == '' && vm.mobile == '') {
                     vm.uNameValid = false;
                     $('loginName').focus();
                     vm.mobileValid = false;
                     vm.lnmsg = '昵称不能为空';
                     vm.mbmsg = '手机号不能为空';
                     vm.click = false;
-                    return;
+
                 }
                 else if (vm.mobile == '') {
                     vm.mobileValid = false;
                     $('mobile').focus();
                     vm.click = false;
-                    return;
+
                 }
                 else if (vm.loginName == '') {
                     vm.uNameValid = false;
                     $('loginName').focus();
                     vm.click = false;
-                    return
+
                 }
                 else {
                     if (vm.mobileValid && vm.uNameValid) {
@@ -169,9 +169,9 @@ $(document).ready(function () {
                                     vm.visible = true;
                                 }
                             });
-                            return;
+
                         }, function (error) {
-                            error.message //=> String
+                            error.message;;;;;;;;; //=> String
                         });
                     }
                     else if (!vm.uNameValid) {
@@ -243,9 +243,9 @@ $(document).ready(function () {
                             window.location = '/';
                         }
                     });
-                    return;
+
                 }, function (error) {
-                    error.message //=> String
+                    error.message;;;;;;;;; //=> String
                 });
             }
         });

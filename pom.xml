@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.khalid.toys</groupId>
     <artifactId>show-core</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>show-core</name>
     <url>http://maven.apache.org</url>
