@@ -4,15 +4,13 @@
             <sitetitle></sitetitle>
             <div class="ui secondary pointing menu">
                 <div class="ui container">
-                    <router-link to="/loginform"><div class="content">登录</div></router-link>
-                    <router-link to="/regform"><div class="content">注册</div></router-link>
-                </div>
-                <div class="ui tab">
-                    <transition>
-                        <router-view></router-view>
-                    </transition>
+                    <a class="item login-item"><div class="content">登录</div></a>
+                    <a class="item reg-item"><div class="content">注册</div></a>
                 </div>
             </div>
+            <transition name="fade">
+                <router-view></router-view>
+            </transition>
         </div>
     </div>
 </template>

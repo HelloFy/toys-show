@@ -7,7 +7,6 @@
     var WIDTH = window.innerWidth, HEIGHT = window.innerHeight, POINT = 35;
     var circleArr = [];
     var context;
-
     //线条：开始xy坐标，结束xy坐标，线条透明度
     function Line (x, y, _x, _y, o) {
         this.beginX = x,

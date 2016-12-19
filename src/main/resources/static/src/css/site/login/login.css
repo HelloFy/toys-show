@@ -1,6 +1,9 @@
 /**
  * Created by 费玥 on 2016/12/9.
  */
+.ts{
+    height: 100%;
+}
 .grid{
      height: 100%;
  }
@@ -11,7 +14,6 @@
     vertical-align: middle;
     padding: 0 10%;
 }
-
 .ui.secondary.pointing.menu{
     border-bottom: none;
 }
@@ -33,4 +35,11 @@
 .ui.basic.red.pointing.prompt.label{
     margin-right: 324px;
     width: 170px;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+    opacity: 0
 }

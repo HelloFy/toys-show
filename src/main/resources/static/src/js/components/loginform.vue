@@ -1,5 +1,5 @@
 <template>
-    <form class="ui large form" id="log-form">
+    <form v-if="show" class="ui large form" id="log-form">
         <div class="ui stacked">
             <div class="field">
                 <div class="ui left icon input">
@@ -14,6 +14,7 @@
                 </div>
             </div>
         </div>
+        <div class="ui fluid large teal submit button">登录</div>
         <div class="ui container">
             <div class="ui secondary menu">
                 <a class="item"><i class="weibo icon"></i> </a>
