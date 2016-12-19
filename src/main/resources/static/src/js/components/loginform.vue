@@ -4,21 +4,15 @@
             <div class="field">
                 <div class="ui left icon input">
                     <i class="user icon"></i>
-                    <input type="text" name="username" v-model="username" placeholder="邮箱/手机">
+                    <input type="text" name="username" placeholder="邮箱/手机">
                 </div>
             </div>
             <div class="field">
                 <div class="ui left icon input">
                     <i class="lock icon"></i>
-                    <input type="password" name="password" v-model="password" placeholder="密码">
+                    <input type="password" name="password" placeholder="密码">
                 </div>
             </div>
-        </div>
-        <div class="ui fluid large teal submit button" v-bind:class="{loading:click}">登录</div>
-        <div class="ui error message" v-bind:class="{hidden:hidden,visible:visible}">
-            <i class="close icon"></i>
-            <div class="header aligned left">登录失败 </div>
-            <p class="aligned left">账号或密码错误.</p>
         </div>
         <div class="ui container">
             <div class="ui secondary menu">
@@ -31,19 +25,12 @@
         </div>
     </form>
 </template>
-<style>
-
-</style>
 <script>
     export default{
         data(){
             return{
                 msg:'hello vue'
             }
-        },
-        components:{
-            'other-component':OtherComponent,
-            HeaderComponent,
         }
     }
 
