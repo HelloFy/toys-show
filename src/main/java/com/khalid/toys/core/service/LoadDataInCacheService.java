@@ -27,10 +27,14 @@ public class LoadDataInCacheService implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         logger.info("begin load data in cache...");
         Iterable<Role> allRoles = iRoleDao.findAll();
-        for (Role role : allRoles){
-            if (!CacheUtil.hasHkey(CacheNamespaceEnum.ROLE_NAME_SPACE+"role",role.getRoleName())){
-                CacheUtil.hPutObject(CacheNamespaceEnum.ROLE_NAME_SPACE+"role",role.getRoleName(),role);
+        try{
+            for (Role role : allRoles){
+                if (!CacheUtil.hasHkey(CacheNamespaceEnum.ROLE_NAME_SPACE+"role",role.getRoleName())){
+                    CacheUtil.hPutObject(CacheNamespaceEnum.ROLE_NAME_SPACE+"role",role.getRoleName(),role);
+                }
             }
+        } catch (Exception ex){
+          logger.error("redis cache down..");
         }
         logger.info("end load data in cache...");
     }
