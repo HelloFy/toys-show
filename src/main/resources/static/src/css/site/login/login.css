@@ -26,9 +26,16 @@
     position: absolute;
     right: 35%;
 }
-.ui.stacked{
-    margin:0em 0em 1em;
+
+.ui.secondary.menu{
+    max-height:40px;
 }
+.approve{
+    padding: 0.78571429em 0.92857143em;
+    color: #aebdc9;
+    margin: 0 auto;
+}
+
 .a-loss-pw{
     padding: 0.78571429em 0.92857143em;
 }
@@ -38,7 +45,7 @@
 }
 
 .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
+    transition: opacity .2s
 }
 .fade-enter, .fade-leave-active {
     opacity: 0

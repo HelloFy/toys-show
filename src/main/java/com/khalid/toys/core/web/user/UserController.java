@@ -4,6 +4,7 @@ import com.khalid.toys.core.domain.Message;
 import com.khalid.toys.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -20,14 +21,14 @@ public class UserController {
     @Autowired
     private Message message;
 
-    @RequestMapping("existName")
+    @RequestMapping(value = "existName",method = RequestMethod.GET)
     public Message isExistName(String loginName) {
         message.setResult(userService.isExistLoginName(loginName));
         message.setErrorMsg("");
         return message;
     }
 
-    @RequestMapping("existMobile")
+    @RequestMapping(value = "existMobile",method = RequestMethod.GET)
     public Message isExistMobile(String mobile){
         message.setResult(userService.isExistMobile(mobile));
         message.setErrorMsg("");

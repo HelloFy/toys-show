@@ -1,5 +1,5 @@
 <template>
-    <form v-if="!show" class="ui large form" id="reg-form">
+    <form class="ui large form" id="reg-form">
         <div class="ui stacked">
             <div class="field left">
                 <div class="ui left icon input">
@@ -20,7 +20,15 @@
                 </div>
             </div>
             <button class="ui fluid large teal button">注册</button>
+            <div class="field">
+                <div class="ui secondary menu">
+                    <div class="approve">
+                        点击注册代表您同意<a href="#">《TS许可协议》</a>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </form>
 </template>
 <script>
