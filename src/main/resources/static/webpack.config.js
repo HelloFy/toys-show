@@ -1,7 +1,13 @@
-var webpack = require('webpack')
-var path = require('path')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var webpack = require('webpack');;;;;;;;;;
+var path = require('path');;;;;;;;;;
+var ExtractTextPlugin = require("extract-text-webpack-plugin");;;;;;;;;;
+var HtmlWebpackPlugin = require('html-webpack-plugin');;;;;;;;;;
+const define= new webpack.DefinePlugin({
+    PRODUCTION: JSON.stringify(JSON.parse(process.env.BUILD_ENV|| 'true')),
+    VERSION: JSON.stringify("1.0.0"),
+    BROWSER_SUPPORTS_HTML5: true,
+    "typeof window": JSON.stringify("object")
+});
 
 module.exports = {
     entry: {
@@ -33,7 +39,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader','css-loader')
+                loader: ExtractTextPlugin.extract({
+                    notExtractLoader: "style-loader",
+                    loader: "css-loader?sourceMap",
+                })
             },
             {
                 test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
@@ -59,7 +68,9 @@ module.exports = {
         }
     },
     plugins: [
-        new ExtractTextPlugin("css/site/[name]/[name]-[id].css"),    //单独使用style标签加载css并设置其路径
+        new ExtractTextPlugin({filename:"css/site/[name]/[name]-[id].css",
+                                disable: false,
+                                allChunks: true}),    //单独使用style标签加载css并设置其路径
         new HtmlWebpackPlugin({                        //根据模板插入css/js等生成最终HTML
             favicon: './src/img/icon/favicon.ico', //favicon路径
             filename: '../templates/index.ftl',    //生成的html存放路径，相对于 path
@@ -87,17 +98,13 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name:'vendor',
             filename:'js/commons.js'
-        })
+        }),
+        define
     ]
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.BUILD_ENV) {
     module.exports.plugins = [
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false

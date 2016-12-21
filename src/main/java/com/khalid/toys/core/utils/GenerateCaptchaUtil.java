@@ -80,7 +80,7 @@ public class GenerateCaptchaUtil {
         Graphics2D g = buffImg.createGraphics();
 
         // 将图像填充为白色
-        g.setColor(Color.WHITE);
+//        g.setColor(Color.WHITE);
         g.fillRect(0, 0, width, height);
 
         // 创建字体
