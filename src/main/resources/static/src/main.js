@@ -1,9 +1,9 @@
-var Vue=require('vue')
-var App=require('./app.vue')
+import Vue from 'vue'
+import App from './app.vue'
 
 new Vue({
     el: '.ui',
     components: {
-        app: App
+        App
     }
 })

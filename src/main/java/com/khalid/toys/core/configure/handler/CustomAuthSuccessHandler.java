@@ -18,7 +18,7 @@ public class CustomAuthSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         Message message = new Message();
-        message.setResult("success");
+        message.setResult(Message.MessageResult.SUCCESS);
         message.setErrorMsg("");
         httpServletResponse.getWriter().write(FastJsonUtil.obj2string(message));
     }

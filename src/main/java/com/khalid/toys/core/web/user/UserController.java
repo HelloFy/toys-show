@@ -23,14 +23,20 @@ public class UserController {
 
     @RequestMapping(value = "existName",method = RequestMethod.GET)
     public Message isExistName(String loginName) {
-        message.setResult(userService.isExistLoginName(loginName));
+        if (userService.isExistLoginName(loginName))
+            message.setResult(Message.MessageResult.FAIL);
+        else
+            message.setResult(Message.MessageResult.SUCCESS);
         message.setErrorMsg("");
         return message;
     }
 
     @RequestMapping(value = "existMobile",method = RequestMethod.GET)
     public Message isExistMobile(String mobile){
-        message.setResult(userService.isExistMobile(mobile));
+        if (userService.isExistMobile(mobile))
+            message.setResult(Message.MessageResult.FAIL);
+        else
+            message.setResult(Message.MessageResult.SUCCESS);
         message.setErrorMsg("");
         return message;
     }

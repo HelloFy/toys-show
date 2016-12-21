@@ -1,19 +1,15 @@
-var webpack = require('webpack');;;;;;;;;;
-var path = require('path');;;;;;;;;;
-var ExtractTextPlugin = require("extract-text-webpack-plugin");;;;;;;;;;
-var HtmlWebpackPlugin = require('html-webpack-plugin');;;;;;;;;;
-const define= new webpack.DefinePlugin({
-    PRODUCTION: JSON.stringify(JSON.parse(process.env.BUILD_ENV|| 'true')),
-    VERSION: JSON.stringify("1.0.0"),
-    BROWSER_SUPPORTS_HTML5: true,
-    "typeof window": JSON.stringify("object")
-});
+var webpack = require('webpack');
+var path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var projectRoot = path.resolve(__dirname, './src')
+var utils = require('./utils')
 
 module.exports = {
     entry: {
-        vendor: ['jquery', 'whatwg-fetch', 'vue'],
-        index: ['./src/main.js'],
-        login: ['./src/js/login/login.js']
+        vendor: ['whatwg-fetch', 'vue'],
+        index: ['./src/main.js']/*,
+        login: ['./src/js/login/login.js']*/
     },
     output: {
         path: path.resolve(__dirname, '../static'),
@@ -29,7 +25,7 @@ module.exports = {
             {
                 // edit this for additional asset file types
                 test: /\.(png|jpg|gif|ico)$/,
-                loader: 'url-loader',
+                loader: 'url',
                 query: {
                     // 把较小的图片转换成base64的字符串内嵌在生成的js文件里
                     limit: 10000,
@@ -39,38 +35,37 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    notExtractLoader: "style-loader",
-                    loader: "css-loader?sourceMap",
-                })
+                loader: ExtractTextPlugin.extract("css-loader")
             },
             {
                 test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
-                loader: 'url-loader',
+                loader: 'url',
                 query: {
                     limit: 10000,
                     // 路径和生产环境下的不同，要与修改后的publickPath相结合
                     name: 'css/fonts/[name].[ext]?[hash:7]',
-                    prefix: 'font'
                 }
-            }
+            },
+            utils.styleLoaders({ sourceMap: true, extract: true})
         ]
     },
-    // example: if you wish to apply custom babel options
-    // instead of using vue-loader's default:
-    babel: {
-        presets: ['es2015', 'stage-0'],
-        plugins: ['transform-runtime']
+    vue: {
+        loaders: utils.cssLoaders({ sourceMap: true }),
+        postcss: [
+            require('autoprefixer')({
+                browsers: ['last 2 versions']
+            })
+        ]
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.js'
+            'vue$': 'vue/dist/vue.common.js',
+            'src': path.resolve(__dirname, 'src'),
+            'components': path.resolve(__dirname, 'src/js/components')
         }
     },
     plugins: [
-        new ExtractTextPlugin({filename:"css/site/[name]/[name]-[id].css",
-                                disable: false,
-                                allChunks: true}),    //单独使用style标签加载css并设置其路径
+        new ExtractTextPlugin("css/site/[name]/[name]-[id].css",{allChunks: true}),    //单独使用style标签加载css并设置其路径
         new HtmlWebpackPlugin({                        //根据模板插入css/js等生成最终HTML
             favicon: './src/img/icon/favicon.ico', //favicon路径
             filename: '../templates/index.ftl',    //生成的html存放路径，相对于 path
@@ -98,12 +93,11 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name:'vendor',
             filename:'js/commons.js'
-        }),
-        define
+        })
     ]
 };
 
-if (process.env.BUILD_ENV) {
+if (process.env.NODE_ENV === 'production') {
     module.exports.plugins = [
         new webpack.optimize.UglifyJsPlugin({
             compress: {

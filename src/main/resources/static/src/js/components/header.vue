@@ -50,6 +50,5 @@
                document.getElementById('logout-form').submit();
             }
         }
-    };
-
+    }
 </script>

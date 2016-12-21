@@ -71,9 +71,7 @@
                 this.url='/getCode?r='+timestamp
             },
             login(){
-
                 this.loading = true;
-
             }
         }
     }

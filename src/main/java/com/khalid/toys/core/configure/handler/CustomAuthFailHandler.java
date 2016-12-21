@@ -17,7 +17,7 @@ public class CustomAuthFailHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
         Message message = new Message();
-        message.setResult("fail");
+        message.setResult(Message.MessageResult.FAIL);
         message.setErrorMsg(e.toString());
         httpServletResponse.getWriter().write(FastJsonUtil.obj2string(message));
     }

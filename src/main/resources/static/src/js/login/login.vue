@@ -16,11 +16,11 @@
     </div>
 </template>
 <script>
-    require('../../css/semantic/semantic.min.css')
-    require('../../css/site/login/login.css')
-    var SiteTitle = require('../components/siteTitle.vue')
-    var LoginForm = require('../components/login-form.vue')
-    var RegForm = require('../components/reg-form.vue')
+    import '../../css/semantic/dist/semantic.min.css'
+    import '../../css/site/login/login.css'
+    import SiteTitle from '../components/site-title.vue'
+    import LoginForm from '../components/login-form.vue'
+    import RegForm from '../components/reg-form.vue'
     export default {
         data(){
             return {
@@ -29,9 +29,9 @@
             }
         },
         components:{
-            'sitetitle':SiteTitle,
-            'login-form':LoginForm,
-            'reg-form':RegForm
+            SiteTitle,
+            LoginForm,
+            RegForm
         },
         methods:{
             lgclick:function(){

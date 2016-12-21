@@ -1,15 +1,16 @@
 <template>
-    <ts_header></ts_header>
+    <compheader></compheader>
 </template>
 
 <script>
-    import CompHeader from './js/components/header.vue'
-    import './css/semantic/semantic.min.css'
-    import './css/site/index.css'
+    import CompHeader from './js/components/header.vue';
+    import './css/semantic/dist/semantic.css';
+    import './css/site/index.css';
 
     export default {
+        name:'app',
         components: {
-            ts_header:CompHeader
+            CompHeader
         }
     }
 </script>

@@ -14,7 +14,9 @@ public class Message implements Serializable {
 
     private static final long serialVersionUID = 8970813727914845893L;
 
-    private Object result;
+    private MessageResult result;
+
+    private Object message;
 
     private String errorMsg;
 
@@ -25,7 +27,7 @@ public class Message implements Serializable {
         return result;
     }
 
-    public void setResult(Object result) {
+    public void setResult(MessageResult result) {
         this.result = result;
     }
 
@@ -35,6 +37,26 @@ public class Message implements Serializable {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    public Object getMessage() {
+        return message;
+    }
+
+    public void setMessage(Object message) {
+        this.message = message;
+    }
+
+    public static enum MessageResult{
+        SUCCESS(true),FAIL(false);
+        private boolean res ;
+        MessageResult(boolean res){
+            this.res = res;
+        }
+        @Override
+        public String toString() {
+            return Boolean.valueOf(res).toString();
+        }
     }
 }
 

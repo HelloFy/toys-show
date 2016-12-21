@@ -1,7 +1,7 @@
-var Vue= require('vue');
-var Login = require('./login.vue');
-var Background = require('../components/background.vue');
-var Footer = require('../components/footer.vue');
+import Vue from 'vue';
+import Login from './login.vue';
+import Background from  '../components/background.vue'
+import TSFooter from  '../components/footer.vue'
 /*var VueRouter = require('vue-router');
 
 Vue.use(VueRouter);
@@ -14,9 +14,9 @@ const router = new VueRouter({
 new Vue({
     el : '.ts',
     components :{
-        'login' : Login,
-        'background':Background,
-        'tsfooter':Footer
+        Login,
+        Background,
+        TSFooter
     }
 /*
     router:router

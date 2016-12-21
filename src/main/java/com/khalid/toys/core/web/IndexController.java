@@ -35,7 +35,7 @@ public class IndexController {
 
     @ExceptionHandler({IllegalStateException.class, SQLException.class})
     public Message dupicateHandler(){
-        message.setResult("failed");
+        message.setResult(Message.MessageResult.FAIL);
         message.setErrorMsg("登录名或手机号重复注册，请重新输入后注册。");
         return message;
     }
@@ -54,7 +54,7 @@ public class IndexController {
     @RequestMapping(value = "/register")
     public Message register(User user) throws SQLException {
         userService.regIn(user);
-        message.setResult("success");
+        message.setResult(Message.MessageResult.SUCCESS);
         message.setErrorMsg("");
         return message;
     }
@@ -68,5 +68,16 @@ public class IndexController {
         response.setDateHeader("Expires", 0);
         session.setAttribute("code",captchaUtil.getCode());
         captchaUtil.write(response.getOutputStream());
+    }
+
+    @RequestMapping(value = "/validateCode",method = RequestMethod.GET)
+    public Message validateCode(HttpSession session,String validateCode){
+        message.setErrorMsg("");
+        message.setResult(Message.MessageResult.FAIL);
+        if (session.getAttribute("Code").equals(validateCode)){
+            message.setErrorMsg("");
+            message.setResult(Message.MessageResult.SUCCESS);
+        }
+        return message;
     }
 }
