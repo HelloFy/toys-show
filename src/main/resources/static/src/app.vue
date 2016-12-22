@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import CompHeader from './js/components/header.vue';
+    import CompHeader from './js/components/header';
     import './css/semantic/dist/semantic.css';
     import './css/site/index.css';
 

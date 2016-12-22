@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import Login from './login.vue';
-import Background from  '../components/background.vue'
-import TSFooter from  '../components/footer.vue'
+import Vue from "vue";
+import Login from "./login";
+import Background from "../components/background";
+import TSFooter from "../components/footer";
 /*var VueRouter = require('vue-router');
 
 Vue.use(VueRouter);

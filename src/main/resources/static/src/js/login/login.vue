@@ -18,9 +18,9 @@
 <script>
     import '../../css/semantic/dist/semantic.min.css'
     import '../../css/site/login/login.css'
-    import SiteTitle from '../components/site-title.vue'
-    import LoginForm from '../components/login-form.vue'
-    import RegForm from '../components/reg-form.vue'
+    import SiteTitle from '../components/site-title'
+    import LoginForm from '../components/login-form'
+    import RegForm from '../components/reg-form'
     export default {
         data(){
             return {
