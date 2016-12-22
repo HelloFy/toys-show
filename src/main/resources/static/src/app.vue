@@ -1,10 +1,10 @@
 <template>
-    <compheader></compheader>
+    <comp-header></comp-header>
 </template>
 
 <script>
     import CompHeader from './js/components/header';
-    import './css/semantic/dist/semantic.css';
+    import './css/semantic-ui/dist/semantic.min.css';
     import './css/site/index.css';
 
     export default {

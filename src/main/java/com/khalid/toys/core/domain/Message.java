@@ -47,7 +47,7 @@ public class Message implements Serializable {
         this.message = message;
     }
 
-    public static enum MessageResult{
+    public enum MessageResult{
         SUCCESS(true),FAIL(false);
         private boolean res ;
         MessageResult(boolean res){

@@ -38,6 +38,6 @@ public class UserRoleService {
 
     public boolean authorized(String id, String targetDomainObject , String permision) {
         Role role = roleService.findByRoleName(permision);
-        return userRoleDao.findByUserIdAndRoleId(id,role.getId()) == null ? false : true;
+        return userRoleDao.findByUserIdAndRoleId(id, role.getId()) != null;
     }
 }

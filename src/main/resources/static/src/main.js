@@ -7,4 +7,4 @@ new Vue({
     components: {
         App
     }
-});;;;;;;;;;;;;;;;;;;
+});
