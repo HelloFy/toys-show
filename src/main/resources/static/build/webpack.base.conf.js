@@ -10,6 +10,7 @@ var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd;
 module.exports = {
   entry: {
+    fetch:'whatwg-fetch',
     app: './src/main.js',
     login:'./src/js/login/login.js'
   },
