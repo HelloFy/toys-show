@@ -35,6 +35,12 @@
     color: #aebdc9;
     margin: 0 auto;
 }
+.v-code{
+  position: absolute;
+  top: 10px;
+  width: 150px;
+  right: 3px;
+}
 
 .a-loss-pw{
     padding: 0.78571429em 0.92857143em;

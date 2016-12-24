@@ -74,7 +74,7 @@ public class IndexController {
     public Message validateCode(HttpSession session,String validateCode){
         message.setErrorMsg("");
         message.setResult(Message.MessageResult.FAIL);
-        if (session.getAttribute("Code").equals(validateCode)){
+        if (session.getAttribute("code").toString().equalsIgnoreCase(validateCode)){
             message.setErrorMsg("");
             message.setResult(Message.MessageResult.SUCCESS);
         }
