@@ -2,9 +2,13 @@
   <form class="ui large form" id="log-form">
     <div class="ui stacked">
       <div class="field" v-bind:class="{error:uerror}">
+        <div class="ui basic red below pointing below prompt label transition"
+             v-bind:class="{hidden:loginvalid,visible:!loginvalid}">
+          {{loginmsg}}
+        </div>
         <div class="ui left icon input">
           <i class="user icon"></i>
-          <input type="text" name="username" v-model="username" placeholder="邮箱/手机">
+          <input type="text" name="username" v-model="username" v-on:keyup.enter="login" placeholder="邮箱/手机">
         </div>
         <div class="ui basic red pointing prompt label transition"
              v-bind:class="{hidden:unamevalid,visible:!unamevalid}">
@@ -14,7 +18,7 @@
       <div class="field" v-bind:class="{error:perror}">
         <div class="ui left icon input">
           <i class="lock icon"></i>
-          <input type="password" name="password" v-model="password" placeholder="密码">
+          <input type="password" name="password" v-model="password" v-on:keyup.enter="login" placeholder="密码">
         </div>
         <div class="ui basic red pointing prompt label transition" v-bind:class="{hidden:pvalid,visible:!pvalid}">
           {{pmsg}}
@@ -23,7 +27,7 @@
       <div class="field" v-bind:class="{error:verror}">
         <div class="ui left icon input">
           <i class="protect icon"></i>
-          <input type="text" name="validate-code" v-model="vcode" placeholder="验证码">
+          <input type="text" name="validate-code" v-model="vcode" v-on:keyup.enter="login" placeholder="验证码">
           <div class="v-code" data-tooltip="看不清？点击切换" data-inverted="">
             <a href="javascript:void(0)" class="ui middle aligned fluid image" v-on:click="recode">
               <img :src="url" alt="验证码"/>
@@ -35,7 +39,7 @@
           {{vmsg}}
         </div>
       </div>
-      <div class="ui fluid large teal button" v-on:click="login" v-bind:class="{loading:loading}">登录</div>
+      <div class="ui fluid large teal submit button" v-on:click.stop="login" v-bind:class="{loading:loading}">登录</div>
       <div class="field">
         <div class="ui secondary menu">
           <a class="item"><i class="weibo icon"></i> </a>
@@ -56,16 +60,18 @@
                 loading:false,
                 username:'',
                 password:'',
+                vcode:'',
                 unamevalid:true,
+                loginvalid:true,
+                pvalid:true,
+                vcodevalid:true,
                 uerror:false,
                 perror:false,
                 verror:false,
                 lnmsg:'',
-                vcode:'',
-                pvalid:true,
-                vcodevalid:true,
                 pmsg:'',
-                vmsg:''
+                vmsg:'',
+                loginmsg:'用户名或密码错误'
             }
         },
         watch: {
@@ -73,6 +79,7 @@
             this.unamevalid = true;
             this.lnmsg = '';
             this.uerror = false;
+            this.loginvalid = true;
           },
           password(val){
             this.pvalid = true;
@@ -140,11 +147,29 @@
                               return;
                             }
                             else{
-                              this.loading = true;
+                              ref.loading = true;
+                              var _csrf_token = document.getElementsByTagName('meta')['_csrf'].getAttribute('content')
                               fetch('/login',{
-                                method:'POST'
-
-                              })
+                                method:'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                    'X-CSRF-TOKEN':_csrf_token
+                                },
+                                credentials: 'include',
+                                body: 'username='+ref.username+'&password='+ref.password}).then(function(response){
+                                    response.json().then(function (data) {
+                                      if(data.result == 'SUCCESS'){
+                                        window.location='/'
+                                      }
+                                      else{
+                                        ref.loading = false;
+                                        ref.loginvalid = false;
+                                      }
+                                    })
+                                },function(error){
+                                  ref.loading = false;
+                                  ref.loginvalid = false;
+                                })
                             }
                           })
                          }, function (error) {
