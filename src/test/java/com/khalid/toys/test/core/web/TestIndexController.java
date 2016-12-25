@@ -38,7 +38,7 @@ public class TestIndexController extends TestBase {
 
     @Test
     public void testIndex() throws Exception {
-        String uri = "/index";
+        String uri = "/";
         mockHttpSession.setAttribute("user",user);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
