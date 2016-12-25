@@ -16,7 +16,7 @@
             </div>
             <div class="ui right secondary menu">
                 <div class="ui simple dropdown item">
-                    <div class="text"><img class="ui avatar image" src="../../img/icon/favicon.ico">{{msg.name}}</div>
+                    <div class="text"><img class="ui avatar image" src="../../img/icon/favicon.png">{{msg.name}}</div>
                     <i class="dropdown icon"></i>
                     <div class="menu" id="profile-menu">
                         <a class="item">我的主页</a>
