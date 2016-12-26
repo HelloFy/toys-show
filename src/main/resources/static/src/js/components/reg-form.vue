@@ -19,7 +19,7 @@
                     <input type="password" name="credence" placeholder="密码">
                 </div>
             </div>
-            <button class="ui fluid large teal button">注册</button>
+            <button class="ui fluid large teal button" v-on:click.stop.prevent="!isShow">注册</button>
             <div class="field">
                 <div class="ui secondary menu">
                     <div class="approve">
@@ -28,14 +28,20 @@
                 </div>
             </div>
         </div>
-
+      <modal v-if="isShow"></modal>
     </form>
 </template>
 <script>
+    import Modal from './modal'
+
     export default{
         data(){
             return{
+               isShow:false
             }
+        },
+        components:{
+          Modal
         }
     }
 

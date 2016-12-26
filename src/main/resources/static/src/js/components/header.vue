@@ -3,7 +3,7 @@
         <div class="ui container">
             <div class="item">
                 <a class="ui header" href="/">
-                    <img class="image" src="png.">
+                    <img class="image" src="../../img/icon/favicon.png">
                     <div class="content">T S</div>
                 </a>
             </div>

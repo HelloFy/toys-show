@@ -39,7 +39,7 @@
           {{vmsg}}
         </div>
       </div>
-      <div class="ui fluid large teal submit button" v-on:click.stop="login" v-bind:class="{loading:loading}">登录</div>
+      <button class="ui fluid large teal button" v-on:click.stop.prevent="login" v-bind:class="{loading:loading}">登录</button>
       <div class="field">
         <div class="ui secondary menu">
           <a class="item"><i class="weibo icon"></i> </a>
