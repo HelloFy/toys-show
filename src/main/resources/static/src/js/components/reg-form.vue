@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-      <modal v-if="isShow" v-on:closeModal="closeModal"></modal>
+      <modal v-if="isShow" v-on:closeModal="closeModal" v-on:toLogin="toLogin"></modal>
     </form>
 </template>
 <script>
@@ -123,48 +123,51 @@
             }
             else{
                require.ensure(["whatwg-fetch"],function () {
+               Promise.all([
                 fetch('/user/existName?loginName='+ref.loginName,{
                   credentials: 'include'
                  }).then(function(response){
-                    response.json().then(function (data) {
-                      if(data.result == 'FAIL'){
-                        ref.lerror=true;
-                        ref.lmsg='昵称重复';
-                        ref.lvalid=false;
-                      }
-                    })
-                 },function (error) {
-                    ref.lerror = true;
-                    ref.lmsg='请检查您的网络设置.';
-                    ref.lvalid=false;
-                 }).catch(function(ex){
-                    ref.lerror = true;
-                    ref.lmsg='请检查您的网络设置.';
-                    ref.lvalid=false;
-                 });
+                      return response.json().then(function (data) {
+                        if(data.result == 'FAIL'){
+                          ref.lerror=true;
+                          ref.lmsg='昵称重复';
+                          ref.lvalid=false;
+                          return ref.lerror;
+                        }})},function (error) {
+                              ref.lerror = true;
+                              ref.lmsg='请检查您的网络设置.';
+                              ref.lvalid=false;
+                              return ref.error;
+                              }).catch(function(ex){
+                                  ref.lerror = true;
+                                  ref.lmsg='请检查您的网络设置.';
+                                  ref.lvalid=false;
+                                  return ref.error;}),
                 fetch('/user/existMobile?mobile='+ref.mobile,{
                   credentials: 'include'
                 }).then(function(response){
-                    response.json().then(function (data) {
+                    return response.json().then(function (data) {
                       if(data.result == 'FAIL'){
                         ref.merror=true;
                         ref.mmsg='手机号重复';
                         ref.mvalid=false;
-                      }
-                    })
-                 },function(error){
-                  ref.merror=true;
-                  ref.mmsg='请检查您的网络设置';
-                  ref.mvalid=false;
-                 }).catch(function(ex){
-                  ref.merror=true;
-                  ref.mmsg='请检查您的网络设置';
-                  ref.mvalid=false;
-                 });
-                 if( ref.merror || ref.lerror){
-                  return;
-                 }
-                 else{
+                        return ref.merror;
+                      }})},function(error){
+                          ref.merror=true;
+                          ref.mmsg='请检查您的网络设置';
+                          ref.mvalid=false;
+                          return ref.merror;
+                          }).catch(function(ex){
+                              ref.merror=true;
+                              ref.mmsg='请检查您的网络设置';
+                              ref.mvalid=false;
+                              return ref.merror;
+                               })]
+               ).then(function(result){
+                  if( ref.merror || ref.lerror){
+                    return ;
+                  }
+                  else{
                    ref.loading = true;
                    var _csrf_token = document.getElementsByTagName('meta')['_csrf'].getAttribute('content')
                    fetch('/register',{
@@ -176,35 +179,54 @@
                     credentials: 'include',
                     body:'loginName='+ref.loginName+'&credence='+ref.credence+'&mobile='+ref.mobile
                    }).then(function(response){
-                     response.json().then(function (data) {
-                      if(data.result == 'SUCCESS'){
-                        ref.isShow = true;
-                        ref.loading = false;
-                      }
-                      else{
-                        ref.loading =false;
-                        ref.lerror = true;
-                        ref.lvalid =false;
-                        ref.lmsg='登录名或手机号被其他人抢占了,T.T';
-                      }
-                   })},function(error){
-                      ref.loading =false;
-                      ref.lerror = true;
-                      ref.lvalid =false;
-                      ref.lmsg='请检查您的网络设置.';
-                   }
-                   ).catch(function(ex){
-                      ref.loading =false;
-                      ref.lerror = true;
-                      ref.lvalid =false;
-                      ref.lmsg='请检查您的网络设置.';
-                   })
-                 }
-              })
-            }
+                       return response.json().then(function (data) {
+                        if(data.result == 'SUCCESS'){
+                          ref.isShow = true;
+                          ref.loading = false;
+                        }
+                        else{
+                          ref.loading =false;
+                          ref.lerror = true;
+                          ref.lvalid =false;
+                          ref.lmsg='登录名或手机号被抢占了,T.T';
+                        }
+                        return ;
+                    })},function(error){
+                          ref.loading =false;
+                          ref.lerror = true;
+                          ref.lvalid =false;
+                          ref.lmsg='请检查您的网络设置.';
+                          return ;
+                          }).catch(function(ex){
+                              ref.loading =false;
+                              ref.lerror = true;
+                              ref.lvalid =false;
+                              ref.lmsg='请检查您的网络设置.';
+                              return;
+                              })
+                  }
+                },function(error){
+                   ref.loading =false;
+                   ref.lerror = true;
+                   ref.lvalid =false;
+                   ref.lmsg='请检查您的网络设置.';
+                   return;
+                   }).catch(function(ex){
+                       ref.loading =false;
+                       ref.lerror = true;
+                       ref.lvalid =false;
+                       ref.lmsg='请检查您的网络设置.';
+                       return;
+                    })
+                })
+              }
           },
           closeModal(){
             this.isShow = false;
+          },
+          toLogin(){
+            this.$emit('toLogin');
+            this.closeModal();
           }
         }
     }

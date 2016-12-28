@@ -56,7 +56,7 @@
               this.$emit('closeModal');
             },
             toLogin(){
-
+              this.$emit('toLogin')
             }
           }
       }

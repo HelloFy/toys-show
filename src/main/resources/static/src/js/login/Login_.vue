@@ -8,9 +8,8 @@
                     <a class="item reg-item" v-on:click="rgclick" v-bind:class="{active:!active}"><div class="content">注册</div></a>
                 </div>
             </div>
-
             <transition name="component-fade" mode="out-in">
-              <component v-bind:is="show"></component>
+              <component v-bind:is="show" v-on:toLogin="lgclick"></component>
            </transition>
         </div>
     </div>
