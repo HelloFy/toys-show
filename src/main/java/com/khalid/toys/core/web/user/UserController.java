@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private Message message;
 
-    @RequestMapping(value = "existName2",method = RequestMethod.GET)
+    @RequestMapping(value = "existName",method = RequestMethod.GET)
     public Message isExistName(String loginName) {
         if (userService.isExistLoginName(loginName))
             message.setResult(Message.MessageResult.FAIL);
