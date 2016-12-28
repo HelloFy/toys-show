@@ -8,10 +8,10 @@
                     <a class="item reg-item" v-on:click="rgclick" v-bind:class="{active:!active}"><div class="content">注册</div></a>
                 </div>
             </div>
-            <transition name="fade" mode="out-in">
-                <login-form v-if="show"></login-form>
-                <reg-form v-if="!show"></reg-form>
-            </transition>
+
+            <transition name="component-fade" mode="out-in">
+              <component v-bind:is="show"></component>
+           </transition>
         </div>
     </div>
 </template>
@@ -38,7 +38,7 @@
     export default {
         data(){
             return {
-                show : true,
+                show : 'login-form',
                 active : true
             }
         },
@@ -50,11 +50,11 @@
         methods:{
             lgclick(){
                 this.active = true;
-                this.show = true;
+                this.show = 'login-form';
             },
             rgclick(){
                 this.active = false;
-                this.show =false;
+                this.show ='reg-form';
             }
         }
     }

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Login from "./Login_";
 import Background from "../components/background";
-import TSFooter from "../components/footer";
+import TsFooter from "../components/footer";
 /*var VueRouter = require('vue-router');
 
 Vue.use(VueRouter);
@@ -16,7 +16,7 @@ new Vue({
     components :{
         Login,
         Background,
-        TSFooter
+        TsFooter
     }
 /*
     router:router
