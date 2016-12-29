@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 /**
  * Created by 费玥 on 2016/12/10.
  */
@@ -18,11 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private Message message;
-
     @RequestMapping(value = "existName",method = RequestMethod.GET)
     public Message isExistName(String loginName) {
+        Message message = new Message();
         if (userService.isExistLoginName(loginName))
             message.setResult(Message.MessageResult.FAIL);
         else
@@ -33,6 +32,7 @@ public class UserController {
 
     @RequestMapping(value = "existMobile",method = RequestMethod.GET)
     public Message isExistMobile(String mobile){
+        Message message = new Message();
         if (userService.isExistMobile(mobile))
             message.setResult(Message.MessageResult.FAIL);
         else
@@ -41,8 +41,13 @@ public class UserController {
         return message;
     }
 
-    @RequestMapping("isLogin")
-    public Message isLogin(){
+    @RequestMapping(value = "isLogin",method = RequestMethod.GET)
+    public Message isLogin(HttpSession session){
+        Message message = new Message();
+        message.setResult(Message.MessageResult.FAIL);
+        if(session.getAttribute("SPRING_SECURITY_CONTEXT")!=null){
+            message.setResult(Message.MessageResult.SUCCESS);
+        }
         return message;
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="ui secondary stackable menu">
+    <div class="ui mini secondary stackable menu">
         <div class="ui container">
             <div class="item">
                 <a class="ui header" href="/">
@@ -14,19 +14,23 @@
                     <div class="ui teal button">搜索</div>
                 </div>
             </div>
-            <div class="ui right secondary menu">
-                <div class="ui simple dropdown item">
-                    <div class="text"><img class="ui avatar image" src="../../img/icon/favicon.png">{{msg.name}}</div>
+            <div class="right menu">
+                <div v-if="isLogin" class="ui simple dropdown item">
+                    <div class="text"><img class="ui avatar image" alt="头像" v-bind:src="avatarUrl">{{name}}</div>
                     <i class="dropdown icon"></i>
                     <div class="menu" id="profile-menu">
                         <a class="item">我的主页</a>
                         <a class="item">私信</a>
                         <a class="item">设置</a>
-                        <a class="item" id="logout-ts" v-on:click="logout()">退出</a>
-                        <form id="logout-form" class="ui hidden" action="/logout" method="post">
-                            <input type="hidden" id="csrf-token" name="_csrf" v-bind:value="msg.csrf" />
+                        <a class="item" id="logout-ts" v-on:click="logout">退出</a>
+                        <form id="logout-x-form" class="hidden" action="/logout" method="post">
+                          <input id="logout-x-csrf-bt" type="hidden" name="_csrf">
                         </form>
                     </div>
+                </div>
+                <div v-if="!isLogin" class="item">
+                  <button class="ui teal basic button">登 录</button>
+                  <button class="ui teal basic button">注 册</button>
                 </div>
             </div>
         </div>
@@ -37,17 +41,34 @@
     export default {
         data: function(){
             return {
-                msg: {
-                    name : 'Josh Player',
-                    csrf : '213'
-                }
+                name : '',
+                isLogin:false,
+                avatarUrl:'../../img/icon/favicon.png',
+                csrf:''
             };
         },
-        mounted:function(){
+        created:function(){
+            var ref = this;
+            require.ensure(["whatwg-fetch"],function(){
+               fetch('/user/isLogin',{
+                  credentials: 'include',
+               }).then(function(response){
+                    return response.json().then(function(data){
+                      if(data.result=='SUCCESS'){
+                        return ref.isLogin=true;
+                      }
+                    })
+               },function(error){
+                  ref.isLogin=false;
+                  return ref.isLogin;
+               })
+            })
         },
         methods: {
             logout: function(){
-               document.getElementById('logout-form').submit();
+               var _csrf_token = document.getElementsByTagName('meta')['_csrf'].getAttribute('content');
+               document.getElementById('logout-x-csrf-bt').value = _csrf_token;
+               document.getElementById('logout-x-form').submit();
             }
         }
     }

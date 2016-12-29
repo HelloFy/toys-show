@@ -43,7 +43,7 @@
       <div class="field">
         <div class="ui secondary menu">
           <a class="item"><i class="weibo icon"></i> </a>
-          <a class="item"><i class="qq icon"></i> </a>
+          <a class="item" href="/qqLogin"><i class="qq icon"></i> </a>
           <div class="right menu">
             <a class="a-loss-pw" href="#">忘记密码？</a>
           </div>
