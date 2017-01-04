@@ -1,14 +1,14 @@
-.ui.secondary.menu{
-    height: 50px;
-    background: #FFD700;
+.ui.mini.stackable.borderless.menu{
+  background: #FFD700;
 }
 
-.ui.header{
-    padding-right: 20px;
-}
+/*@media only screen and (min-width: 768px) {
+  .ui.menu:not(.secondary):not(.text):not(.tabular):not(.borderless)>.container>.item:not(.right):not(.borderless):first-child {
+    border-left:none !important;
+  }
+}*/
 
 #profile-menu{
-    /*width: 100px;!important;*/
     background: #FFD700;
-    margin-top: -2px;
+    margin-top: -0.1px;
 }

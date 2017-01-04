@@ -1,5 +1,5 @@
 <template>
-    <div class="ui mini secondary stackable menu">
+    <div class="ui mini stackable borderless menu">
         <div class="ui container">
             <div class="item">
                 <a class="ui header" href="/">
@@ -14,7 +14,7 @@
                     <div class="ui teal button">搜索</div>
                 </div>
             </div>
-            <div class="right menu">
+            <div class="right container menu">
                 <div v-if="isLogin" class="ui simple dropdown item">
                     <div class="text"><img class="ui avatar image" alt="头像" v-bind:src="avatarUrl">{{name}}</div>
                     <i class="dropdown icon"></i>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div v-if="!isLogin" class="item">
-                  <button class="ui teal basic button">登 录</button>
+                  <button class="ui teal basic button" style="margin-right:5px;">登 录</button>
                   <button class="ui teal basic button">注 册</button>
                 </div>
             </div>
@@ -38,12 +38,22 @@
 </template>
 
 <script>
+    import '../../css/semantic-ui/dist/components/container.min.css'
+    import '../../css/semantic-ui/dist/components/menu.min.css'
+    import '../../css/semantic-ui/dist/components/button.min.css'
+    import '../../css/semantic-ui/dist/components/item.min.css'
+    import '../../css/semantic-ui/dist/components/header.min.css'
+    import '../../css/semantic-ui/dist/components/image.min.css'
+    import '../../css/semantic-ui/dist/components/dropdown.min.css'
+    import '../../css/semantic-ui/dist/components/icon.min.css'
+    import '../../css/semantic-ui/dist/components/input.min.css'
+    import '../../css/semantic-ui/dist/components/site.min.css'
     export default {
         data: function(){
             return {
                 name : '',
                 isLogin:false,
-                avatarUrl:'../../img/icon/favicon.png',
+                avatarUrl:'/img/icon/favicon.png',
                 csrf:''
             };
         },
