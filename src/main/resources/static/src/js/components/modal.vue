@@ -40,7 +40,7 @@
     margin-top: -92.5px!important;
     display: block!important;
     max-width: 420px;
-    margin-left: -15% !important
+    margin-left: -11% !important
   }
 }
 
