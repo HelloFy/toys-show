@@ -120,6 +120,15 @@
             <version>19.0</version>
         </dependency>
 
+        <!-- QQ Auth dependency-->
+        <dependency>
+            <groupId>com.qq.connect</groupId>
+            <artifactId>sdk4j</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/sdk-lib/Sdk4J.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>
