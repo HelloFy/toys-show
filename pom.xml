@@ -189,10 +189,20 @@
         <resources>
             <!--package local jar-->
             <resource>
-                <targetPath>BOOT-INF/</targetPath>
+                <targetPath>sdk-lib/</targetPath>
                 <directory>sdk-lib/</directory>
                 <includes>
                     <include>**/Sdk4J.jar</include>
+                </includes>
+            </resource>
+            <resource>
+                <targetPath>static/</targetPath>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>static/assets/**</include>
+                    <include>templates/**</include>
+                    <include>application.properties</include>
+                    <include>qqconnectconfig.properties</include>
                 </includes>
             </resource>
         </resources>
