@@ -165,38 +165,16 @@
                     </includes>
                 </configuration>
             </plugin>
-            <!-- package plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <descriptorRefs>
-                                <descriptorRef>jar-with-dependencies</descriptorRef>
-                            </descriptorRefs>
-                            <finalName>showcore-snapshot-1.0</finalName>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
         <resources>
-            <!--package local jar-->
             <resource>
-                <targetPath>sdk-lib/</targetPath>
+                <targetPath>BOOT-INF/lib/</targetPath>
                 <directory>sdk-lib/</directory>
                 <includes>
-                    <include>**/Sdk4J.jar</include>
+                    <include>Sdk4J.jar</include>
                 </includes>
             </resource>
             <resource>
-                <targetPath>static/</targetPath>
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>static/assets/**</include>
