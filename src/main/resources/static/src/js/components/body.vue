@@ -58,7 +58,6 @@
   }
 </style>
 <script>
-    import '../../css/semantic-ui/dist/components/grid.min.css'
     export default{
         data(){
             return{

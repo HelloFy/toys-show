@@ -16,7 +16,7 @@
             </div>
             <div class="right container menu">
                 <div v-if="isLogin" class="ui simple dropdown item">
-                    <div class="text"><img class="ui avatar image" alt="头像" v-bind:src="avatarUrl">{{name}}</div>
+                    <div class="text"><img class="ui avatar image" alt="头像" src="../../img/avatar-test.jpg">{{name}}</div>
                     <i class="dropdown icon"></i>
                     <div class="menu" id="profile-menu">
                         <a class="item">我的主页</a>

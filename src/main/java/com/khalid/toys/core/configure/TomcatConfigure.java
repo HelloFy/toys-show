@@ -24,8 +24,8 @@ public class TomcatConfigure {
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-        tomcat.addConnectorCustomizers(new MyTomcatConnectorCustomizer());
         if (environment.equalsIgnoreCase("production")) {
+            tomcat.addConnectorCustomizers(new MyTomcatConnectorCustomizer());
             arpLifecycle = new AprLifecycleListener();//不初始化会报错
             tomcat.setProtocol("org.apache.coyote.http11.Http11AprProtocol");
         }
