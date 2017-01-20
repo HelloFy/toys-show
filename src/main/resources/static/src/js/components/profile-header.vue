@@ -19,15 +19,18 @@
                   </div>
                 </div>
                 <div class="profile-footer">
-                  <div class="item">
+                  <a class="item">
                     <div class="icon-wrapper">
-                      <i class="angle double down icon"></i>
+                      <i class="angle down icon"></i>
                     </div>
                     查看详细资料
-                  </div>
+                  </a>
                   <div class="profile-button-wrapper">
-                    <button class="ui primary button">关注他 </button>
-                    <button class="ui button">私信 </button>
+                    <button class="ui button" v-bind:class="{primary:!isFollow}" v-on:click="follow">{{follow_btn_txt}}</button>
+                    <button class="ui icon button">
+                      <i class="send icon"></i>
+                      私信
+                    </button>
                   </div>
                 </div>
               </div>
@@ -86,7 +89,21 @@
     import '../../css/semantic-ui/dist/components/item.min.css'
     export default{
         data(){
-            return;
+            return {
+              isFollow:false,
+              follow_btn_txt:'关注他'
+            };
+        },
+        methods:{
+          follow(){
+              this.isFollow=!this.isFollow;
+              if(!this.isFollow){
+                this.follow_btn_txt='关注他';
+              }
+              else{
+                this.follow_btn_txt='取消关注';
+              }
+          }
         }
     }
 </script>

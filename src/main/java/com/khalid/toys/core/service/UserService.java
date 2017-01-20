@@ -1,11 +1,7 @@
 package com.khalid.toys.core.service;
 
-import com.khalid.toys.core.dao.IRoleDao;
-import com.khalid.toys.core.dao.IUserDao;
-import com.khalid.toys.core.dao.IUserRoleDao;
-import com.khalid.toys.core.domain.Role;
-import com.khalid.toys.core.domain.User;
-import com.khalid.toys.core.domain.UserRole;
+import com.khalid.toys.core.dao.*;
+import com.khalid.toys.core.domain.*;
 import com.khalid.toys.core.utils.CacheNamespaceEnum;
 import com.khalid.toys.core.utils.CacheUtil;
 import com.khalid.toys.core.utils.RoleNameConstant;
@@ -14,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 费玥 on 2016/12/8.
@@ -29,6 +26,12 @@ public class UserService {
 
     @Autowired
     private IUserRoleDao iUserRoleDao;
+
+    @Autowired
+    private IFollowRelationDao iFollowRelationDao;
+
+    @Autowired
+    private IFollowInfoDao iFollowInfoDao;
 
     @Autowired
     private CustomPassWordEncoder customPassWordEncoder;
@@ -57,6 +60,9 @@ public class UserService {
             UserRole userRole = new UserRole();
             userRole.setRoleId(commonRole.getId());
             userRole.setUserId(userSaved.getId());
+            FollowInfo followInfo = new FollowInfo();
+            followInfo.setUserId(userSaved.getId());
+            iFollowInfoDao.save(followInfo);
             iUserRoleDao.save(userRole);
         } catch (Exception ex) {
             CacheUtil.rmHKeys(CacheNamespaceEnum.USER_LOGINNAME_SPACE + "loginName", user.getLoginName());
@@ -92,5 +98,29 @@ public class UserService {
 
     public User findByEmailOrMobile(String email ,String mobile) {
         return iUserDao.findByEmailOrMobile(email,mobile);
+    }
+
+    public void addFansCount(String userId){
+       FollowInfo followInfo = iFollowInfoDao.findOne(userId);
+       followInfo.setFansCount(String.valueOf(Integer.getInteger(followInfo.getFansCount())+1));
+       iFollowInfoDao.save(followInfo);
+    }
+
+    public void addFollowCount(String userId){
+
+    }
+
+    public FollowRelation follow(String fansId,String followId){
+        FollowRelation followRelation = new FollowRelation();
+        followRelation.setFansId(fansId);
+        followRelation.setFollowId(followId);
+        List<FollowRelation> fansToFollow = iFollowRelationDao.findByFansIdAndFollowedId(followId,fansId);
+        if (!fansToFollow.isEmpty()){
+            followRelation.setMutual(true);
+            fansToFollow.get(0).setMutual(true);
+            iFollowRelationDao.save(fansToFollow);
+        }
+        iFollowRelationDao.save(followRelation);
+        return followRelation;
     }
 }

@@ -6,6 +6,7 @@ import com.khalid.toys.core.service.CustomAuthenticationProvider;
 import com.khalid.toys.core.service.CustomPassWordEncoder;
 import com.khalid.toys.core.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -31,6 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomPassWordEncoder customPassWordEncoder;
 
+    @Value("${environment}")
+    private String environment;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailService).passwordEncoder(customPassWordEncoder);
@@ -52,8 +56,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login.html")
                 .invalidateHttpSession(true)
-                .permitAll()
-                .and()
-                .csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
+                .permitAll();
+        if (environment.equalsIgnoreCase("develop")){
+            http.csrf().disable();
+        }
+        else {
+            http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
+        }
     }
 }

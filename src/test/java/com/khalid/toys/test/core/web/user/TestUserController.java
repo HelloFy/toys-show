@@ -41,6 +41,34 @@ public class TestUserController extends TestBase {
         String result = mvcResult.getResponse().getContentAsString();
 
         Assert.assertTrue("错误，正确的返回值为200", status == 200);
-        Assert.assertEquals("错误，正确的返回值为True",true,FastJsonUtil.string2obj(result, Message.class).getResult());
+        Assert.assertEquals("错误，正确的返回值为True",true,FastJsonUtil.string2obj(result, Message.class).getMessage());
+    }
+
+
+    @Test
+    public void testMobileExist() throws Exception {
+        String uri = "/user/existMobile";
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON).param("mobile","17701085294"))
+                .andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        String result = mvcResult.getResponse().getContentAsString();
+
+        Assert.assertTrue("错误，正确的返回值为200", status == 200);
+        Assert.assertEquals("错误，正确的返回值为True",true,FastJsonUtil.string2obj(result, Message.class).getMessage());
+    }
+
+
+    @Test
+    public void testFollow() throws Exception {
+        String uri = "/user/wwww/follow/qwwe";
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(uri).accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        String result = mvcResult.getResponse().getContentAsString();
+
+        Assert.assertTrue("错误，正确的返回值为200", status == 200);
+        Assert.assertEquals("错误，正确的返回值为True", Message.MessageResult.SUCCESS,FastJsonUtil.string2obj(result, Message.class).getResult());
     }
 }

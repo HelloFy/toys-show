@@ -1,8 +1,10 @@
 package com.khalid.toys.core.web.user;
 
+import com.khalid.toys.core.domain.FollowRelation;
 import com.khalid.toys.core.domain.Message;
 import com.khalid.toys.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +50,15 @@ public class UserController {
         if(session.getAttribute("SPRING_SECURITY_CONTEXT")!=null){
             message.setResult(Message.MessageResult.SUCCESS);
         }
+        return message;
+    }
+
+    @RequestMapping(value = "{fansId}/follow/{id}",method = RequestMethod.PUT)
+    public Message follow(@PathVariable String fansId , @PathVariable String id){
+        Message message = new Message();
+        FollowRelation relation = userService.follow(fansId,id);
+        message.setResult(Message.MessageResult.SUCCESS);
+        message.setMessage(relation.isMutual());
         return message;
     }
 }
