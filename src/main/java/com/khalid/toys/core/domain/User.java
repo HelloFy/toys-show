@@ -12,6 +12,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 
+import static com.alibaba.fastjson.serializer.SerializerFeature.WriteMapNullValue;
+
 /**
  * Created by 费玥 on 2016/12/8.
  */
@@ -29,7 +31,6 @@ public class User implements Serializable {
     @Column(name = "login_name" , length = 20 , nullable = false , unique = true)
     private String loginName;
 
-    @JSONField(serialize = false)
     @Column(name = "credence" ,length = 256 , nullable = false)
     private char[] credence;
 
@@ -40,14 +41,12 @@ public class User implements Serializable {
     private String email;
 
     @Column(name = "sex", length = 5 , nullable = true)
-    private String sex;
+    private String sex = "男";
 
-    @JSONField (format="yyyy-MM-dd")
     @Column(name = "reg_time" , nullable = false )
     @Temporal(TemporalType.DATE)
     private Date regTime;
 
-    @JSONField (format="yyyy-MM-dd")
     @Column(name = "birthday")
     @Temporal(TemporalType.DATE)
     private Date birthday;
@@ -144,43 +143,75 @@ public class User implements Serializable {
         }
 
         @Override
+        @JSONField(serialize = false)
         public Collection<? extends GrantedAuthority> getAuthorities() {
             return this.authorities;
         }
 
         @Override
+        @JSONField(serialize = false)
         public String getPassword() {
             return new String(User.this.getCredence());
         }
 
         @Override
+        @JSONField(serialize = false)
         public String getUsername() {
             return username;
         }
 
         @Override
+        @JSONField(serialize = false)
         public boolean isAccountNonExpired() {
             return true;
         }
 
         @Override
+        @JSONField(serialize = false)
         public boolean isAccountNonLocked() {
             return !User.this.isLock;
         }
 
         @Override
+        @JSONField(serialize = false)
         public boolean isCredentialsNonExpired() {
             return true;
         }
 
         @Override
+        @JSONField(serialize = false)
         public boolean isEnabled() {
             return true;
         }
 
+        @JSONField
         public String getUid(){
             return User.this.id;
         }
-    }
 
+        @JSONField(serialzeFeatures = {WriteMapNullValue})
+        public String getLoginName(){
+            return User.this.loginName;
+        }
+
+        @JSONField(serialzeFeatures = {WriteMapNullValue})
+        public String getMobile(){
+            return User.this.mobile;
+        }
+
+        @JSONField(serialzeFeatures = {WriteMapNullValue})
+        public String getSex(){
+            return User.this.sex;
+        }
+
+        @JSONField (format="yyyy-MM-dd",serialzeFeatures = {WriteMapNullValue})
+        private Date getBirthDay(){
+            return User.this.birthday;
+        }
+
+        @JSONField(serialzeFeatures = {WriteMapNullValue})
+        public String getEmail(){
+            return User.this.email;
+        }
+    }
 }

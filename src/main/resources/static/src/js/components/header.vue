@@ -10,16 +10,16 @@
             <div class="item">
                 <div class="ui action left icon input">
                     <i class="search icon"></i>
-                    <input type="text" placeholder="搜索...">
+                    <input type="text" placeholdPer="搜索...">
                     <div class="ui teal button">搜索</div>
                 </div>
             </div>
             <div class="right container menu">
                 <div v-if="isLogin" class="ui simple dropdown item">
-                    <div class="text"><img class="ui avatar image" alt="头像" src="../../img/avatar-test.jpg">{{name}}</div>
+                    <div class="text"><img class="ui avatar image" alt="头像" src="../../img/avatar-test.jpg">{{uinfo.loginName}}</div>
                     <i class="dropdown icon"></i>
                     <div class="menu" id="profile-menu">
-                        <a class="item">我的主页</a>
+                        <a class="item" v-bind:onclick="toProfile">我的主页</a>
                         <a class="item">私信</a>
                         <a class="item">设置</a>
                         <a class="item" id="logout-ts" v-on:click="logout">退出</a>
@@ -28,7 +28,7 @@
                         </form>
                     </div>
                 </div>
-                <div v-if="!isLogin" class="item">
+                <div v-else class="item">
                   <button class="ui teal basic button" style="margin-right:5px;">登 录</button>
                   <button class="ui teal basic button">注 册</button>
                 </div>
@@ -52,33 +52,27 @@
         data: function(){
             return {
                 name : '',
-                isLogin:false,
                 avatarUrl:'/img/icon/favicon.png',
-                csrf:''
+                csrf:'',
             };
         },
-        created:function(){
-            var ref = this;
-            require.ensure(["whatwg-fetch"],function(){
-               fetch('/user/isLogin',{
-                  credentials: 'include',
-               }).then(function(response){
-                    return response.json().then(function(data){
-                      if(data.result=='SUCCESS'){
-                        return ref.isLogin=true;
-                      }
-                    })
-               },function(error){
-                  ref.isLogin=false;
-                  return ref.isLogin;
-               })
-            })
+        props: {
+          uinfo:[String,Object],
+          isLogin:Boolean
+        },
+        computed: {
+          profilePage: function () {
+              return '/user/profile/'+this.uinfo.uid;
+           }
         },
         methods: {
-            logout: function(){
+            logout(){
                var _csrf_token = document.getElementsByTagName('meta')['_csrf'].getAttribute('content');
                document.getElementById('logout-x-csrf-bt').value = _csrf_token;
                document.getElementById('logout-x-form').submit();
+            },
+            toProfile(){
+
             }
         }
     }

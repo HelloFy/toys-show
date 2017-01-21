@@ -52,10 +52,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(new CustomAuthFailHandler())
                 .permitAll()
                 .and()
+                .rememberMe()
+                .alwaysRemember(true)
+                .rememberMeCookieName("_ts_rem")
+                .useSecureCookie(false)
+                .tokenValiditySeconds(3600 * 24 * 7)
+                .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login.html")
                 .invalidateHttpSession(true)
+                .deleteCookies("_ts_rem")
                 .permitAll();
         if (environment.equalsIgnoreCase("develop")){
             http.csrf().disable();

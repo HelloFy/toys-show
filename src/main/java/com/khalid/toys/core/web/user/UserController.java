@@ -2,8 +2,11 @@ package com.khalid.toys.core.web.user;
 
 import com.khalid.toys.core.domain.FollowRelation;
 import com.khalid.toys.core.domain.Message;
+import com.khalid.toys.core.domain.User;
 import com.khalid.toys.core.service.UserService;
+import com.khalid.toys.core.utils.FastJsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,12 +46,15 @@ public class UserController {
         return message;
     }
 
-    @RequestMapping(value = "isLogin",method = RequestMethod.GET)
-    public Message isLogin(HttpSession session){
+    @RequestMapping(value = "isLoginAndGetInfo",method = RequestMethod.GET)
+    public Message isLoginAndGetInfo(HttpSession session){
         Message message = new Message();
         message.setResult(Message.MessageResult.FAIL);
-        if(session.getAttribute("SPRING_SECURITY_CONTEXT")!=null){
+        SecurityContext securityContext = (SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        if(securityContext !=null && securityContext.getAuthentication().isAuthenticated()){
+            User.CustomUserDetail userInfo = (User.CustomUserDetail) securityContext.getAuthentication().getPrincipal();
             message.setResult(Message.MessageResult.SUCCESS);
+            message.setMessage(FastJsonUtil.obj2string(userInfo));
         }
         return message;
     }
