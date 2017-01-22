@@ -34,6 +34,13 @@ public class LoginController {
         return message;
     }
 
+    @ExceptionHandler(Exception.class)
+    public Message runExceptionHandler(){
+        Message message = new Message();
+        message.setResult(Message.MessageResult.FAIL);
+        return message;
+    }
+
     @RequestMapping(value="/login.html")
     public ModelAndView loginPage(Map<String, Object> model, HttpSession httpSession){
         return new ModelAndView("login/login");
