@@ -32,6 +32,11 @@ public class TestUserController extends TestBase {
     }
 
     @Test
+    public void testIsLoginAndGetInfo(){
+        String uri = "/user/isLoginAndGetInfo";
+    }
+
+    @Test
     public void testLoginNameExist() throws Exception {
         String uri = "/user/existName";
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON).param("loginName","feiyue"))

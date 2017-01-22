@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="right container menu">
-                <div v-if="isLogin" class="ui simple dropdown item">
+                <div v-if="logined" class="ui simple dropdown item">
                     <div class="text"><img class="ui avatar image" alt="头像" src="../../img/avatar-test.jpg">{{uinfo.loginName}}</div>
                     <i class="dropdown icon"></i>
                     <div class="menu" id="profile-menu">
@@ -28,7 +28,7 @@
                         </form>
                     </div>
                 </div>
-                <div v-else class="item">
+                <div v-if="login" class="item">
                   <button class="ui teal basic button" style="margin-right:5px;">登 录</button>
                   <button class="ui teal basic button">注 册</button>
                 </div>
@@ -37,13 +37,40 @@
     </div>
 </template>
 
+<style>
+  .ui.header:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+    font-size: 1.28em;
+  }
+  .ui.header {
+    border: none;
+  }
+  .ui.header>.image+.content, .ui.header>img+.content {
+    padding-left: .75rem;
+    vertical-align: middle;
+  }
+  .ui.header .content {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .ui.header>.image, .ui.header>img {
+    display: inline-block;
+    margin-top: .14285em;
+    width: 2.5em;
+    height: auto;
+    vertical-align: middle;
+  }
+  .ui.avatar.image{
+    height: 2em;
+    border-radius: 500rem;
+  }
+
+</style>
+
 <script>
     import '../../css/semantic-ui/dist/components/container.min.css'
     import '../../css/semantic-ui/dist/components/menu.min.css'
     import '../../css/semantic-ui/dist/components/button.min.css'
     import '../../css/semantic-ui/dist/components/item.min.css'
-    import '../../css/semantic-ui/dist/components/header.min.css'
-    import '../../css/semantic-ui/dist/components/image.min.css'
     import '../../css/semantic-ui/dist/components/dropdown.min.css'
     import '../../css/semantic-ui/dist/components/icon.min.css'
     import '../../css/semantic-ui/dist/components/input.min.css'
@@ -58,7 +85,8 @@
         },
         props: {
           uinfo:[String,Object],
-          isLogin:Boolean
+          logined:Boolean,
+          login:Boolean
         },
         computed: {
           profilePage: function () {

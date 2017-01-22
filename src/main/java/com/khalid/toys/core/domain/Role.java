@@ -21,7 +21,7 @@ public class Role implements Serializable,GrantedAuthority {
     @GenericGenerator(name = "uuid", strategy = "uuid")
     private String id;
 
-    @Column(name = "role_name", length = 10 ,nullable = false ,unique = true)
+    @Column(name = "role_name", length = 25 ,nullable = false ,unique = true)
     private String roleName;
 
     @Column(name = "role_desc" , nullable = true)

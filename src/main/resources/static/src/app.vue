@@ -1,6 +1,6 @@
 <template>
   <div>
-    <comp-header v-bind:uinfo="info" v-bind:isLogin="isLogin"></comp-header>
+    <comp-header v-bind:uinfo="info" v-bind:logined="logined" v-bind:login="login"></comp-header>
     <ts-body></ts-body>
   </div>
 </template>
@@ -17,7 +17,8 @@
         data(){
           return {
             info:'',
-            isLogin:false
+            logined:false,
+            login:false
           }
         },
         components: {
@@ -33,17 +34,21 @@
                }).then(function(response){
                     return response.json().then(function(data){
                       if(data.result=='SUCCESS'){
-                        ref.isLogin=true;
+                        ref.logined=true;
+                        ref.login=false;
                         ref.info =(new Function("","return "+data.message))();
                         return;
                       }
                       else{
-                        ref.isLogin=false;
+                        ref.login=true;
+                        ref.logined=false;
+                        return;
                       }
                     })
                },function(error){
-                  ref.isLogin=false;
-                  return ref.isLogin;
+                   ref.login=true;
+                   ref.logined=false;
+                   return ;
                })
             })
         },
