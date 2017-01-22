@@ -15,20 +15,7 @@
     </div>
 </template>
 <script>
-    import '../../css/semantic-ui/dist/components/site.min.css'
-    import '../../css/semantic-ui/dist/components/container.min.css'
-    import '../../css/semantic-ui/dist/components/form.min.css'
-    import '../../css/semantic-ui/dist/components/grid.min.css'
-    import '../../css/semantic-ui/dist/components/header.min.css'
-    import '../../css/semantic-ui/dist/components/icon.min.css'
-    import '../../css/semantic-ui/dist/components/image.min.css'
-    import '../../css/semantic-ui/dist/components/button.min.css'
-    import '../../css/semantic-ui/dist/components/menu.min.css'
-    import '../../css/semantic-ui/dist/components/item.min.css'
-    import '../../css/semantic-ui/dist/components/input.min.css'
-    import '../../css/semantic-ui/dist/components/label.min.css'
-    import '../../css/semantic-ui/dist/components/transition.min.css'
-
+    import '../../css/semantic-ui/dist/semantic-login.min.css'
 
     import '../../css/site/login/login.css'
     import SiteTitle from '../components/site-title'

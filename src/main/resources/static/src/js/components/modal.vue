@@ -47,8 +47,6 @@
 </style>
 
 <script>
-      import '../../css/semantic-ui/dist/components/modal.min.css'
-      import '../../css/semantic-ui/dist/components/dimmer.min.css'
 
       export default{
           methods:{

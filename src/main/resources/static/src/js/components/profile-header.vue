@@ -84,9 +84,6 @@
 
 </style>
 <script>
-    import '../../css/semantic-ui/dist/components/segment.min.css'
-    import '../../css/semantic-ui/dist/components/header.min.css'
-    import '../../css/semantic-ui/dist/components/item.min.css'
     export default{
         data(){
             return {

@@ -10,8 +10,8 @@
     import TsBody from './js/components/body'
     import ProfileHeader from './js/components/profile-header'
 
-    import './css/semantic-ui/dist/components/grid.min.css'
-    import './css/site/index.css';
+    import './css/semantic-ui/dist/semantic-index.min.css'
+    import './css/site/index.css'
 
     export default {
         data(){

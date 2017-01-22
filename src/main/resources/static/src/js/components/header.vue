@@ -67,14 +67,6 @@
 </style>
 
 <script>
-    import '../../css/semantic-ui/dist/components/container.min.css'
-    import '../../css/semantic-ui/dist/components/menu.min.css'
-    import '../../css/semantic-ui/dist/components/button.min.css'
-    import '../../css/semantic-ui/dist/components/item.min.css'
-    import '../../css/semantic-ui/dist/components/dropdown.min.css'
-    import '../../css/semantic-ui/dist/components/icon.min.css'
-    import '../../css/semantic-ui/dist/components/input.min.css'
-    import '../../css/semantic-ui/dist/components/site.min.css'
     export default {
         data: function(){
             return {
