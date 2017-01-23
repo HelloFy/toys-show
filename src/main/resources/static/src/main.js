@@ -8,6 +8,11 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 
 
+const router = new VueRouter({
+  mode : 'hash',
+  routes:require('../config/routes.js')
+});
+
 const store = new Vuex.Store({
   state: {
     uinfo:'',
@@ -15,43 +20,42 @@ const store = new Vuex.Store({
     nonLogin:false
   },
   mutations: {
-    updateUInfo (state) {
+  },
+  actions:{
+    updateUInfo (context) {
       require.ensure(["whatwg-fetch"],function(){
         fetch('/user/isLoginAndGetInfo',{
           credentials: 'include',
         }).then(function(response){
           return response.json().then(function(data){
             if(data.result=='SUCCESS'){
-              state.isLogin = true;
-              state.nonLogin = false;
-              state.uinfo =(new Function("","return "+data.message))();
-
+              context.state.isLogin = true;
+              context.state.nonLogin = false;
+              context.state.uinfo =(new Function("","return "+data.message))();
+              return;
             }
             else{
-              state.isLogin= false;
-              state.nonLogin =true;
-
+              context.state.isLogin= false;
+              context.state.nonLogin =true;
+              return;
             }
           })
         },function(error){
-          state.isLogin= false;
-          state.nonLogin =true;
-
+          context.state.isLogin= false;
+          context.state.nonLogin =true;
+          return;
         })
       })
     }
   }
 });
 
-const router = new VueRouter({
-  routes:require('../config/routes.js')
-});
 
 new Vue({
     el: '.ui',
+    store,
     components: {
-        App
+      App
     },
-    router:router,
-    store
+    router
 });

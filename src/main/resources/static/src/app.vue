@@ -5,7 +5,7 @@
 <script>
     import CompHeader from './js/components/header';
 
-    import './css/semantic-ui/dist/semantic.min.css'
+    import './css/semantic-ui/dist/semantic-index.min.css'
     import './css/site/index.css'
 
     export default {
@@ -24,7 +24,7 @@
             CompHeader
         },
         beforeCreate(){
-           this.$store.commit('updateUInfo');
+           this.$store.dispatch('updateUInfo');
         }
     }
 </script>

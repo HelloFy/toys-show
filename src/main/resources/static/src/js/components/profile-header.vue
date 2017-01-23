@@ -27,14 +27,14 @@
                     </div>
                     查看详细资料
                   </a>
-                  <div class="profile-button-wrapper" v-if="!isSelf">
-                    <button class="ui button" v-bind:class="{primary:!isFollow}" v-on:click="follow">{{follow_btn_txt}}</button>
+                  <div class="profile-button-wrapper" v-show="!isSelf">
+                    <button class="ui button" v-bind:class="{primary:!isFollow}" v-on:click="follow">{{followBtnTxt}}</button>
                     <button class="ui icon button">
                       <i class="send icon"></i>
                       私信
                     </button>
                   </div>
-                  <div class="profile-button-wrapper" v-else>
+                  <div class="profile-button-wrapper" v-show="isSelf">
                     <button class="ui basic button">编辑个人资料</button>
                   </div>
                 </div>
@@ -89,15 +89,17 @@
 <script>
 
     import '../../css/semantic-ui/dist/components/segment.min.css'
+    import '../../css/semantic-ui/dist/components/image.min.css'
+    import '../../css/semantic-ui/dist/components/header.min.css'
     export default{
         data(){
             return {
               isFollow:false,
-              follow_btn_txt:'关注他',
+              followBtnTxt:'关注他',
               isSelf:false,
               name:'',
               isMan:true
-            };
+            }
         },
         /**
         beforeRouteEnter (to, from, next) {
@@ -126,22 +128,25 @@
           follow(){
             this.isFollow=!this.isFollow;
             if(!this.isFollow){
-              this.follow_btn_txt='关注他';
+              this.followBtnTxt='关注他';
             }
             else{
-              this.follow_btn_txt='取消关注';
+              this.followBtnTxt='取消关注';
             }
+            return;
           },
           fetchData(){
             if(this.$route.params.uid === this.$store.state.uinfo.uid){
               this.isSelf = true;
-              this.isMan = (this.$store.state.uinfo.sex == '男')? true : false;
+              this.isMan = (this.$store.state.uinfo.sex === '男')? true : false;
               this.name = this.$store.state.uinfo.loginName;
             }
             else{
               this.name = '他人';
               this.isMan = false;
+              this.isSelf = false;
             }
+            return;
           }
         }
     }
