@@ -1,6 +1,8 @@
+const TsBody = resolve => require(['../src/js/components/body.vue'], resolve);;;;;;;;;;;;;;;;;;
+const ProfileHeader = resolve => require(['../src/js/components/profile-header.vue'], resolve);;;;;;;;;;;;;;;;;;
+
 const  routes= [
-    { path: '/loginform', component: require('./src/js/components/login-form.vue') },
-    { path: '/regform', component: require('./src/js/components/reg-form.vue') },
-    { path: '/login.html', redirect: '/loginform' }
+    { path: 'profile/:uid', name: 'userProfile',component: ProfileHeader},
+    { path: '' , name: 'index' , component: TsBody}
 ];
 module.exports = routes;

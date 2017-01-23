@@ -1,11 +1,12 @@
 <template>
+  <div>
     <div class="ui mini stackable borderless menu">
         <div class="ui container">
             <div class="item">
-                <a class="ui header" href="/">
+                <router-link class="ui header" to="/">
                     <img class="image" src="../../img/icon/favicon.png">
                     <div class="content">T S</div>
-                </a>
+                </router-link>
             </div>
             <div class="item">
                 <div class="ui action left icon input">
@@ -15,11 +16,11 @@
                 </div>
             </div>
             <div class="right container menu">
-                <div v-if="logined" class="ui simple dropdown item">
+                <div v-if="isLogin" class="ui simple dropdown item">
                     <div class="text"><img class="ui avatar image" alt="头像" src="../../img/avatar-test.jpg">{{uinfo.loginName}}</div>
                     <i class="dropdown icon"></i>
                     <div class="menu" id="profile-menu">
-                        <a class="item" v-bind:onclick="toProfile">我的主页</a>
+                        <router-link class="item" :to="{name: 'userProfile', params: { uid: uid }}">我的主页</router-link>
                         <a class="item">私信</a>
                         <a class="item">设置</a>
                         <a class="item" id="logout-ts" v-on:click="logout">退出</a>
@@ -28,13 +29,15 @@
                         </form>
                     </div>
                 </div>
-                <div v-if="login" class="item">
+                <div v-else-if="nonLogin" class="item">
                   <button class="ui teal basic button" style="margin-right:5px;">登 录</button>
                   <button class="ui teal basic button">注 册</button>
                 </div>
             </div>
         </div>
     </div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <style>
@@ -77,12 +80,12 @@
         },
         props: {
           uinfo:[String,Object],
-          logined:Boolean,
-          login:Boolean
+          isLogin:Boolean,
+          nonLogin:Boolean
         },
         computed: {
-          profilePage: function () {
-              return '/user/profile/'+this.uinfo.uid;
+          uid: function () {
+              return this.uinfo.uid;
            }
         },
         methods: {
